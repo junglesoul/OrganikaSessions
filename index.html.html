@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organika Sessions - Electronic Music Parties</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-purple: #8f78a8;
+            --secondary-teal: #2aa99d;
+            --dark-bg: #121212;
+            --darker-bg: #0a0a0a;
+            --light-text: #f5f5f5;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+            line-height: 1.6;
+        }
+        
+        .bg-custom-dark {
+            background-color: var(--darker-bg);
+        }
+        
+        .bg-custom-purple {
+            background-color: var(--primary-purple);
+        }
+        
+        .bg-custom-teal {
+            background-color: var(--secondary-teal);
+        }
+        
+        .text-custom-purple {
+            color: var(--primary-purple);
+        }
+        
+        .text-custom-teal {
+            color: var(--secondary-teal);
+        }
+        
+        .border-custom-purple {
+            border-color: var(--primary-purple);
+        }
+        
+        .border-custom-teal {
+            border-color: var(--secondary-teal);
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(10, 10, 10, 0.7), rgba(10, 10, 10, 0.9)), url('https://page1.genspark.site/v1/base64_upload/4632e77b70f0f93b707957a6ad1a951d');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 40%, rgba(42, 169, 157, 0.2), transparent 70%),
+                        radial-gradient(circle at 70% 60%, rgba(143, 120, 168, 0.2), transparent 70%);
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .leaf-decoration {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: url('https://page1.genspark.site/v1/base64_upload/4632e77b70f0f93b707957a6ad1a951d') no-repeat center;
+            background-size: contain;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .leaf-top-right {
+            top: -50px;
+            right: -50px;
+            transform: rotate(45deg);
+        }
+        
+        .leaf-bottom-left {
+            bottom: -50px;
+            left: -50px;
+            transform: rotate(-135deg);
+        }
+        
+        .section-divider {
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary-purple), var(--secondary-teal), transparent);
+            margin: 3rem auto;
+            width: 80%;
+        }
+        
+        .card {
+            transition: all 0.3s ease;
+            background: rgba(18, 18, 18, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(143, 120, 168, 0.2);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(42, 169, 157, 0.3);
+            border-color: var(--secondary-teal);
+        }
+        
+        .nav-link {
+            position: relative;
+            padding-bottom: 5px;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(90deg, var(--primary-purple), var(--secondary-teal));
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .btn-custom {
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-teal));
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-custom:hover {
+            background: linear-gradient(135deg, var(--secondary-teal), var(--primary-purple));
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(42, 169, 157, 0.4);
+        }
+        
+        .footer {
+            background: var(--darker-bg);
+            border-top: 1px solid rgba(143, 120, 168, 0.3);
+        }
+        
+        .glow {
+            box-shadow: 0 0 15px rgba(42, 169, 157, 0.5);
+        }
+        
+        .podcast-player {
+            background: rgba(18, 18, 18, 0.5);
+            border: 1px solid rgba(143, 120, 168, 0.3);
+            backdrop-filter: blur(5px);
+        }
+        
+        .gallery-item {
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .gallery-item img {
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(10, 10, 10, 0.2), rgba(42, 169, 157, 0.5));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .bg-gradient-custom {
+            background: linear-gradient(135deg, rgba(143, 120, 168, 0.1), rgba(42, 169, 157, 0.1));
+        }
+        
+        .internal-page-card {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .internal-page-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(143, 120, 168, 0.2), rgba(42, 169, 157, 0.2));
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .internal-page-card:hover::before {
+            opacity: 1;
+        }
+        
+        .internal-page-content {
+            position: relative;
+            z-index: 2;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header and Navigation -->
+    <header class="bg-custom-dark py-4 px-6 sticky top-0 z-50">
+        <div class="container mx-auto flex flex-wrap justify-between items-center">
+            <div class="flex items-center">
+                <h1 class="text-3xl font-bold">
+                    <span class="text-custom-purple">organika</span>
+                    <span class="text-white">sessions</span>
+                </h1>
+            </div>
+            
+            <nav class="hidden md:flex space-x-8">
+                <a href="#about" class="nav-link text-white hover:text-custom-teal">About</a>
+                <a href="#podcasts" class="nav-link text-white hover:text-custom-teal">Podcasts</a>
+                <a href="#artists" class="nav-link text-white hover:text-custom-teal">Artists</a>
+                <a href="#gigs" class="nav-link text-white hover:text-custom-teal">Gigs</a>
+                <a href="#gallery" class="nav-link text-white hover:text-custom-teal">Gallery</a>
+                <a href="#contact" class="nav-link text-white hover:text-custom-teal">Contact</a>
+            </nav>
+            
+            <div class="block md:hidden">
+                <button class="text-white focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero min-h-screen flex items-center">
+        <div class="container mx-auto px-6 hero-content">
+            <div class="max-w-3xl">
+                <h1 class="text-6xl md:text-7xl font-bold mb-6">
+                    <span class="text-custom-purple">Organika</span>
+                    <span class="text-white">Sessions</span>
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 text-gray-300">Immerse yourself in organic electronic sounds that transcend boundaries. Experience music as it's meant to be felt.</p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#podcasts" class="btn-custom px-8 py-3 rounded-full font-semibold text-lg">
+                        Listen to Podcasts
+                    </a>
+                    <a href="#gigs" class="px-8 py-3 rounded-full border-2 border-custom-teal text-white font-semibold text-lg hover:bg-custom-teal hover:bg-opacity-20 transition-all">
+                        Upcoming Events
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-6 relative overflow-hidden">
+        <div class="leaf-decoration leaf-top-right"></div>
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold mb-12 text-center">
+                <span class="text-custom-purple">About</span> Us
+            </h2>
+            <div class="flex flex-col md:flex-row gap-12 items-center">
+                <div class="md:w-1/2">
+                    <p class="text-lg mb-6">Organika Sessions was born from a passion for authentic electronic music that connects with the soul. Founded in 2018, we've created a community that celebrates the organic side of electronic sounds.</p>
+                    
+                    <p class="text-lg mb-6">Our mission is to provide immersive musical experiences that blend natural elements with electronic production, creating a unique sonic journey for our audience.</p>
+                    
+                    <p class="text-lg">From intimate coffee shop gatherings to all-night club experiences, Organika Sessions is more than music—it's a movement that brings people together through shared sonic exploration.</p>
+                </div>
+                <div class="md:w-1/2 bg-custom-dark p-6 rounded-lg glow">
+                    <h3 class="text-2xl font-semibold mb-4 text-custom-teal">Our Philosophy</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="fas fa-leaf text-custom-teal mt-1 mr-3"></i>
+                            <span>Authentic sound experiences that prioritize quality over commercialism</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-music text-custom-teal mt-1 mr-3"></i>
+                            <span>Supporting emerging artists who bring fresh perspectives to electronic music</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-users text-custom-teal mt-1 mr-3"></i>
+                            <span>Building a community that appreciates the depth and nuance of organic electronic music</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-globe text-custom-teal mt-1 mr-3"></i>
+                            <span>Creating sustainable events with responsible practices and mindful experiences</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Podcast Section -->
+    <section id="podcasts" class="py-20 px-6 bg-gradient-custom">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold mb-12 text-center">
+                <span class="text-custom-purple">Pod</span><span class="text-custom-teal">casts</span>
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Podcast 1 -->
+                <div class="card rounded-lg overflow-hidden">
+                    <div class="h-48 bg-gradient-to-br from-custom-purple to-custom-teal relative">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <i class="fas fa-play-circle text-6xl text-white opacity-80 hover:opacity-100 cursor-pointer transition-opacity"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Organika Sessions #042</h3>
+                        <p class="text-gray-400 mb-4">Deep organic house journey with ethereal melodies and tribal rhythms</p>
+                        <div class="podcast-player p-3 rounded-md flex items-center">
+                            <div class="w-full">
+                                <div class="h-1 w-full bg-gray-700 rounded-full mb-2">
+                                    <div class="h-1 bg-gradient-to-r from-custom-purple to-custom-teal rounded-full" style="width: 35%"></div>
+                                </div>
+                                <div class="flex justify-between text-sm">
+                                    <span>17:24</span>
+                                    <span>49:35</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex justify-between items-center">
+                            <span class="text-sm text-gray-400">By DJ Naturalia</span>
+                            <div class="flex space-x-2">
+                                <i class="fas fa-heart text-custom-purple cursor-pointer"></i>
+                                <i class="fas fa-share-alt text-custom-teal cursor-pointer"></i>
+                                <i class="fas fa-download text-gray-400 cursor-pointer"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Podcast 2 -->
+                <div class="card rounded-lg overflow-hidden">
+                    <div class="h-48 bg-gradient-to-br from-custom-teal to-custom-purple relative">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <i class="fas fa-play-circle text-6xl text-white opacity-80 hover:opacity-100 cursor-pointer transition-opacity"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Organika Sessions #041</h3>
+                        <p class="text-gray-400 mb-4">Progressive beats with forest-inspired soundscapes</p>
+                        <div class="podcast-player p-3 rounded-md flex items-center">
+                            <div class="w-full">
+                                <div class="h-1 w-full bg-gray-700 rounded-full mb-2">
+                                    <div class="h-1 bg-gradient-to-r from-custom-purple to-custom-teal rounded-full" style="width: 65%"></div>
+                                </div>
+                                <div class="flex justify-between text-sm">
+                                    <span>42:10</span>
+                                    <span>1:12:45</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex justify-between items-center">
+                            <span class="text-sm text-gray-400">By Eco-Vibrations</span>
+                            <div class="flex space-x-2">
+                                <i class="fas fa-heart text-custom-purple cursor-pointer"></i>
+                                <i class="fas fa-share-alt text-custom-teal cursor-pointer"></i>
+                                <i class="fas fa-download text-gray-400 cursor-pointer"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Podcast 3 -->
+                <div class="card rounded-lg overflow-hidden">
+                    <div class="h-48 bg-gradient-to-br from-purple-700 to-teal-500 relative">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <i class="fas fa-play-circle text-6xl text-white opacity-80 hover:opacity-100 cursor-pointer transition-opacity"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Organika Sessions #040</h3>
+                        <p class="text-gray-400 mb-4">Melodic techno with ambient textures and organic percussion</p>
+                        <div class="podcast-player p-3 rounded-md flex items-center">
+                            <div class="w-full">
+                                <div class="h-1 w-full bg-gray-700 rounded-full mb-2">
+                                    <div class="h-1 bg-gradient-to-r from-custom-purple to-custom-teal rounded-full" style="width: 85%"></div>
+                                </div>
+                                <div class="flex justify-between text-sm">
+                                    <span>55:18</span>
+                                    <span>1:05:22</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex justify-between items-center">
+                            <span class="text-sm text-gray-400">By Terra Form</span>
+                            <div class="flex space-x-2">
+                                <i class="fas fa-heart text-custom-purple cursor-pointer"></i>
+                                <i class="fas fa-share-alt text-custom-teal cursor-pointer"></i>
+                                <i class="fas fa-download text-gray-400 cursor-pointer"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#" class="btn-custom px-8 py-3 rounded-full font-semibold text-lg inline-flex items-center">
+                    <span>View All Podcasts</span>
+                    <i class="fas fa-angle-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Artists Section -->
+    <section id="artists" class="py-20 px-6 relative overflow-hidden">
+        <div class="leaf-decoration leaf-bottom-left"></div>
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold mb-12 text-center">
+                <span class="text-custom-teal">Featured</span> <span class="text-custom-purple">Artists</span>
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Artist 1 -->
+                <div class="card rounded-lg overflow-hidden">
+                    <div class="h-64 bg-gradient-to-br from-purple-900 via-purple-800 to-purple-700 flex items-center justify-center">
+                        <i class="fas fa-user-circle text-8xl text-gray-300"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-semibold mb-2">DJ Naturalia</h3>
+                        <p class="text-gray-400 mb-4">Deep organic house specialist with roots in traditional world music</p>
+                        <div class="flex mb-4">
+                            <span class="bg-custom-purple bg-opacity-20 text-custom-purple px-3 py-1 rounded-full text-sm mr-2">Deep House</span>
+                            <span class="bg-custom-teal bg-opacity-20 text-custom-teal px-3 py-1 rounded-full text-sm">Tribal</span>
+                        </div>
+                        <div class="mt-4 flex justify-between">
+                            <div class="flex space-x-3">
+                                <a href="#" class="text-gray-400 hover:text-custom-purple transition-colors">
+                                    <i class="fab fa-soundcloud"></i>
+                                </a>
+                                <a href="#" class="text-gray-400 hover:text-custom-purple transition-colors">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a href="#" class="text-gray-400 hover:text-custom-purple transition-colors">
+                                    <i class="fab fa-spotify"></i>
+                                </a>
+                            </div>
+                            <a href="#" class="text-custom-teal hover:text-custom-purple transition-colors">
+                                View Profile <i class="fas fa-arrow-right ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Artist 2 -->
+                <div class="card rounded-lg overflow-hidden">
+                    <div class="h-64 bg-gradient-to-br from-teal-900 via-teal-800 to-teal-700 flex items-center justify-center">
+                        <i class="fas fa-user-circle text-8xl text-gray-300"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-semibold mb-2">Eco-Vibrations</h3>
+                        <p class="text-gray-400 mb-4">Progressive producer exploring the connection between electronic music and nature</p>
+                        <div class="flex mb-4">
+                            <span class="bg-custom-purple bg-opacity-20 text-custom-purple px-3 py-1 rounded-full text-sm mr-2">Progressive</span>
+                            <span class="bg-custom-teal bg-opacity-20 text-custom-teal px-3 py-1 rounded-full text-sm">Ambient</span>
+                        </div>
+                        <div class="mt-4 flex justify-between">
+                            <div class="flex space-x-3">
+                                <a href="#" class="text-gray-400 hover:text-custom-purple transition-colors">
+                                    <i class="fab fa-soundcloud"></i>
+                                </a>
+                                <a href="#" class="text-gray-400 hover:text-custom-purple transition-colors">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a href="#" class="text-gray-400 hover:text-custom-purple transition-colors">
+                                    <i class="fab fa-spotify"></i>
+                                </a>
+                            </div>
+                            <a href="#" class="text-custom-teal hover:text-custom-purple transition-colors">
+                                View Profile <i class="fas fa-arrow-right ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Artist 3 -->
+                <div class="card rounded-lg overflow-hidden">
+                    <div class="h-64 bg-gradient-to-br from-indigo-900 via-indigo-800 to-indigo-700 flex items-center justify-center">
+                        <i class="fas fa-user-circle text-8xl text-gray-300"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-semibold mb-2">Terra Form</h3>
+                        <p class="text-gray-400 mb-4">Melodic techno artist with a minimalist approach to complex rhythms</p>
+                        <div class="flex mb-4">
+                            <span class="bg-custom-purple bg-opacity-20 text-custom-purple px-3 py-1 rounded-full text-sm mr-2">Melodic Techno</span>
+                            <span class="bg-custom-teal bg-opacity-20 text-custom-teal px-3 py-1 rounded-full text-sm">Minimal</span>
+                        </div>
+                        <div class="mt-4 flex justify-between">
+                            <div class="flex space-x-3">
+                                <a href="#" class="text-gray-400 hover:text-custom-purple transition-colors">
+                                    <i class="fab fa-soundcloud"></i>
+                                </a>
+                                <a href="#" class="text-gray-400 hover:text-custom-purple transition-colors">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a href="#" class="text-gray-400 hover:text-custom-purple transition-colors">
+                                    <i class="fab fa-spotify"></i>
+                                </a>
+                            </div>
+                            <a href="#" class="text-custom-teal hover:text-custom-purple transition-colors">
+                                View Profile <i class="fas fa-arrow-right ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#" class="border-2 border-custom-purple text-white hover:bg-custom-purple hover:bg-opacity-20 transition-all px-8 py-3 rounded-full font-semibold text-lg inline-flex items-center">
+                    <span>Discover All Artists</span>
+                    <i class="fas fa-angle-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Gigs Section -->
+    <section id="gigs" class="py-20 px-6 bg-gradient-custom">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold mb-12 text-center">
+                <span class="text-custom-teal">Up</span><span class="text-custom-purple">coming</span> Gigs
+            </h2>
+            
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                        <tr class="text-left border-b border-gray-700">
+                            <th class="py-4 px-6">Date</th>
+                            <th class="py-4 px-6">Event</th>
+                            <th class="py-4 px-6">Location</th>
+                            <th class="py-4 px-6">Artists</th>
+                            <th class="py-4 px-6">Tickets</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Event 1 -->
+                        <tr class="border-b border-gray-800 hover:bg-gray-900 transition-colors">
+                            <td class="py-4 px-6">
+                                <div class="font-medium">15 Oct 2023</div>
+                                <div class="text-gray-400 text-sm">9:00 PM - 4:00 AM</div>
+                            </td>
+                            <td class="py-4 px-6">
+                                <div class="font-medium text-custom-purple">Organika Sessions: Nocturnal</div>
+                                <div class="text-gray-400 text-sm">Deep house & melodic techno night</div>
+                            </td>
+                            <td class="py-4 px-6">
+                                <div class="font-medium">Techno Temple</div>
+                                <div class="text-gray-400 text-sm">Brooklyn, NY</div>
+                            </td>
+                            <td class="py-4 px-6">
+                                <div>DJ Naturalia, Eco-Vibrations, Terra Form</div>
+                            </td>
+                            <td class="py-4 px-6">
+                                <a href="#" class="btn-custom px-4 py-2 rounded-full text-sm">Buy Tickets</a>
+                            </td>
+                        </tr>
+                        
+                        <!-- Event 2 -->
+                        <tr class="border-b border-gray-800 hover:bg-gray-900 transition-colors">
+                            <td class="py-4 px-6">
+                                <div class="font-medium">22 Oct 2023</div>
+                                <div class="text-gray-400 text-sm">2:00 PM - 9:00 PM</div>
+                            </td>
+                            <td class="py-4 px-6">
+                                <div class="font-medium text-custom-teal">Organika Coffee Session</div>
+                                <div class="text-gray-400 text-sm">Daytime organic electronic vibes</div>
+                            </td>
+                            <td class="py-4 px-6">
+                                <div class="font-medium">Organic Brew Co.</div>
+                                <div class="text-gray-400 text-sm">Austin, TX</div>
+                            </td>
+                            <td class="py-4 px-6">
+                                <div>Leaf Symphony, Morning Dew, Terra Form</div>
+                            </td>
+                            <td class="py-4 px-6">
+                                <a href="#" class="btn-custom px-4 py-2 rounded-full text-sm">Buy Tickets</a>
+                            </td>
+                        </tr>
+                        
+                        <!-- Event 3 -->
+                        <tr class="border-b border-gray-800 hover:bg-gray-900 transition-colors">
+                            <td class="py-4 px-6">
+                                <div class="font-medium">5 Nov 2023</div>
+                                <div class="text-gray-400 text-sm">10:00 PM - 6:00 AM</div>
+                            </td>
+                            <td class="py-4 px-6">
+                                <div class="font-medium text-custom-purple">Organika Underground</div>
+                                <div class="text-gray-400 text-sm">Deep and minimal techno experience</div>
+                            </td>
+                            <td class="py-4 px-6">
+                                <div class="font-medium">Submerge Warehouse</div>
+                                <div class="text-gray-400 text-sm">Detroit, MI</div>
+                            </td>
+                            <td class="py-4 px-6">
+                                <div>Forest Mind, DJ Naturalia, Electronic Roots</div>
+                            </td>
+                            <td class="py-4 px-6">
+                                <a href="#" class="btn-custom px-4 py-2 rounded-full text-sm">Buy Tickets</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#" class="border-2 border-custom-teal text-white hover:bg-custom-teal hover:bg-opacity-20 transition-all px-8 py-3 rounded-full font-semibold text-lg inline-flex items-center">
+                    <span>Full Event Calendar</span>
+                    <i class="fas fa-calendar-alt ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-20 px-6 relative overflow-hidden">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold mb-12 text-center">
+                <span class="text-custom-purple">Event</span> <span class="text-custom-teal">Gallery</span>
+            </h2>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <!-- Gallery items would normally have real images, using colored divs as placeholders -->
+                <div class="gallery-item rounded-lg overflow-hidden">
+                    <div class="aspect-square bg-gradient-to-br from-purple-900 to-purple-700"></div>
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus text-white text-2xl"></i>
+                    </div>
+                </div>
+                <div class="gallery-item rounded-lg overflow-hidden">
+                    <div class="aspect-square bg-gradient-to-br from-teal-900 to-teal-700"></div>
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus text-white text-2xl"></i>
+                    </div>
+                </div>
+                <div class="gallery-item rounded-lg overflow-hidden">
+                    <div class="aspect-square bg-gradient-to-br from-indigo-900 to-indigo-700"></div>
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus text-white text-2xl"></i>
+                    </div>
+                </div>
+                <div class="gallery-item rounded-lg overflow-hidden">
+                    <div class="aspect-square bg-gradient-to-br from-purple-800 to-teal-600"></div>
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus text-white text-2xl"></i>
+                    </div>
+                </div>
+                <div class="gallery-item rounded-lg overflow-hidden">
+                    <div class="aspect-square bg-gradient-to-br from-teal-800 to-purple-600"></div>
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus text-white text-2xl"></i>
+                    </div>
+                </div>
+                <div class="gallery-item rounded-lg overflow-hidden">
+                    <div class="aspect-square bg-gradient-to-br from-purple-700 to-indigo-900"></div>
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus text-white text-2xl"></i>
+                    </div>
+                </div>
+                <div class="gallery-item rounded-lg overflow-hidden">
+                    <div class="aspect-square bg-gradient-to-br from-indigo-800 to-purple-800"></div>
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus text-white text-2xl"></i>
+                    </div>
+                </div>
+                <div class="gallery-item rounded-lg overflow-hidden">
+                    <div class="aspect-square bg-gradient-to-br from-teal-700 to-teal-900"></div>
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus text-white text-2xl"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#" class="btn-custom px-8 py-3 rounded-full font-semibold text-lg inline-flex items-center">
+                    <span>View Full Gallery</span>
+                    <i class="fas fa-images ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Internal Pages Section -->
+    <section class="py-20 px-6 bg-gradient-custom">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold mb-12 text-center">
+                <span class="text-custom-purple">Explore</span> Our <span class="text-custom-teal">Offerings</span>
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Club Offer Card -->
+                <div class="internal-page-card rounded-lg overflow-hidden border border-custom-purple">
+                    <div class="h-64 bg-gradient-to-br from-purple-900 to-custom-purple flex items-center justify-center">
+                        <i class="fas fa-music text-8xl text-white opacity-60"></i>
+                    </div>
+                    <div class="p-8 internal-page-content">
+                        <h3 class="text-3xl font-semibold mb-4 text-custom-purple">Club Offer</h3>
+                        <p class="text-gray-300 mb-6">Partner with Organika Sessions to bring our unique electronic music experience to your venue. We offer complete event packages including artist booking, promotion, and production.</p>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-custom-purple mr-2"></i>
+                                <span>Curated artist lineup</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-custom-purple mr-2"></i>
+                                <span>Marketing and promotion</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-custom-purple mr-2"></i>
+                                <span>Sound and lighting production</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-custom-purple mr-2"></i>
+                                <span>Branded event materials</span>
+                            </li>
+                        </ul>
+                        <a href="club-offer.html" class="btn-custom px-6 py-3 rounded-full font-semibold inline-flex items-center">
+                            <span>Explore Club Offers</span>
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Coffee Party Card -->
+                <div class="internal-page-card rounded-lg overflow-hidden border border-custom-teal">
+                    <div class="h-64 bg-gradient-to-br from-teal-900 to-custom-teal flex items-center justify-center">
+                        <i class="fas fa-coffee text-8xl text-white opacity-60"></i>
+                    </div>
+                    <div class="p-8 internal-page-content">
+                        <h3 class="text-3xl font-semibold mb-4 text-custom-teal">Coffee Party</h3>
+                        <p class="text-gray-300 mb-6">Our daytime electronic music experience combines the best coffee culture with ambient and downtempo sounds. Perfect for cafes and creative spaces looking for a unique experience.</p>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-custom-teal mr-2"></i>
+                                <span>Relaxed daytime atmosphere</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-custom-teal mr-2"></i>
+                                <span>Specially curated ambient sets</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-custom-teal mr-2"></i>
+                                <span>Coffee and music pairings</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-custom-teal mr-2"></i>
+                                <span>Community-focused experience</span>
+                            </li>
+                        </ul>
+                        <a href="coffee-party.html" class="btn-custom px-6 py-3 rounded-full font-semibold inline-flex items-center">
+                            <span>Discover Coffee Parties</span>
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Newsletter Section -->
+    <section class="py-20 px-6">
+        <div class="container mx-auto max-w-4xl">
+            <div class="bg-custom-dark p-10 rounded-2xl border border-gray-800 relative overflow-hidden">
+                <div class="leaf-decoration" style="top: -100px; right: -100px; opacity: 0.05; transform: rotate(45deg);"></div>
+                <h2 class="text-3xl font-bold mb-6 text-center">
+                    <span class="text-custom-purple">Stay</span> in the <span class="text-custom-teal">Loop</span>
+                </h2>
+                <p class="text-center text-gray-300 mb-8">Subscribe to our newsletter for exclusive podcast releases, event announcements, and special offers.</p>
+                <form class="max-w-xl mx-auto">
+                    <div class="flex flex-col md:flex-row gap-4">
+                        <input type="email" placeholder="Your email address" class="bg-darker-bg text-white px-4 py-3 rounded-full flex-grow focus:outline-none focus:ring-2 focus:ring-custom-purple border border-gray-700">
+                        <button type="submit" class="btn-custom px-6 py-3 rounded-full font-semibold">
+                            Subscribe
+                        </button>
+                    </div>
+                    <div class="mt-4 text-center text-sm text-gray-400">
+                        <label class="flex items-center justify-center">
+                            <input type="checkbox" class="mr-2">
+                            <span>I agree to receive emails from Organika Sessions and accept the privacy policy</span>
+                        </label>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-6 bg-gradient-custom">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold mb-12 text-center">
+                <span class="text-custom-teal">Get in</span> <span class="text-custom-purple">Touch</span>
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="text-2xl font-semibold mb-6">Contact Us</h3>
+                    <p class="mb-8 text-gray-300">Have questions about our events, artist bookings, or collaboration opportunities? Send us a message and our team will get back to you within 24 hours.</p>
+                    
+                    <form>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium mb-2" for="name">Name</label>
+                            <input type="text" id="name" class="w-full bg-darker-bg text-white px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-custom-purple border border-gray-700">
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium mb-2" for="email">Email</label>
+                            <input type="email" id="email" class="w-full bg-darker-bg text-white px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-custom-purple border border-gray-700">
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium mb-2" for="subject">Subject</label>
+                            <select id="subject" class="w-full bg-darker-bg text-white px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-custom-purple border border-gray-700">
+                                <option>General Inquiry</option>
+                                <option>Artist Booking</option>
+                                <option>Venue Partnership</option>
+                                <option>Media Request</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium mb-2" for="message">Message</label>
+                            <textarea id="message" rows="4" class="w-full bg-darker-bg text-white px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-custom-purple border border-gray-700"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn-custom px-8 py-3 rounded-full font-semibold">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-semibold mb-6">Find Us</h3>
+                    
+                    <div class="mb-8">
+                        <p class="text-gray-300 mb-4">Connect with us on social media for the latest updates, behind-the-scenes content, and community discussions.</p>
+                        
+                        <div class="flex space-x-4">
+                            <a href="#" class="w-12 h-12 rounded-full bg-custom-dark flex items-center justify-center border border-gray-700 hover:border-custom-purple transition-colors">
+                                <i class="fab fa-instagram text-xl"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 rounded-full bg-custom-dark flex items-center justify-center border border-gray-700 hover:border-custom-purple transition-colors">
+                                <i class="fab fa-facebook-f text-xl"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 rounded-full bg-custom-dark flex items-center justify-center border border-gray-700 hover:border-custom-purple transition-colors">
+                                <i class="fab fa-soundcloud text-xl"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 rounded-full bg-custom-dark flex items-center justify-center border border-gray-700 hover:border-custom-purple transition-colors">
+                                <i class="fab fa-youtube text-xl"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <h4 class="text-xl font-medium mb-4">Contact Details</h4>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <i class="fas fa-envelope text-custom-teal mt-1 mr-3"></i>
+                                <span>info@organikasessions.com</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-phone text-custom-teal mt-1 mr-3"></i>
+                                <span>+1 (555) 123-4567</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-map-marker-alt text-custom-teal mt-1 mr-3"></i>
+                                <span>123 Electronic Avenue<br>Brooklyn, NY 10001</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-xl font-medium mb-4">Business Hours</h4>
+                        <ul class="space-y-2">
+                            <li class="flex justify-between">
+                                <span>Monday - Friday:</span>
+                                <span>10:00 AM - 6:00 PM</span>
+                            </li>
+                            <li class="flex justify-between">
+                                <span>Saturday:</span>
+                                <span>By appointment</span>
+                            </li>
+                            <li class="flex justify-between">
+                                <span>Sunday:</span>
+                                <span>Closed</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer py-12 px-6">
+        <div class="container mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">
+                        <span class="text-custom-purple">organika</span>
+                        <span class="text-white">sessions</span>
+                    </h3>
+                    <p class="text-gray-400 mb-4">Immersive electronic music experiences that connect people through organic sounds and authentic vibes.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-custom-purple transition-colors">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-custom-purple transition-colors">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-custom-purple transition-colors">
+                            <i class="fab fa-soundcloud"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-custom-purple transition-colors">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-custom-teal transition-colors">Home</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-custom-teal transition-colors">About</a></li>
+                        <li><a href="#podcasts" class="text-gray-400 hover:text-custom-teal transition-colors">Podcasts</a></li>
+                        <li><a href="#artists" class="text-gray-400 hover:text-custom-teal transition-colors">Artists</a></li>
+                        <li><a href="#gigs" class="text-gray-400 hover:text-custom-teal transition-colors">Events</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-custom-teal transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Our Services</h4>
+                    <ul class="space-y-2">
+                        <li><a href="club-offer.html" class="text-gray-400 hover:text-custom-teal transition-colors">Club Offers</a></li>
+                        <li><a href="coffee-party.html" class="text-gray-400 hover:text-custom-teal transition-colors">Coffee Parties</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-custom-teal transition-colors">Artist Booking</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-custom-teal transition-colors">Event Production</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-custom-teal transition-colors">Label Releases</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-custom-teal transition-colors">Music Licensing</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Newsletter</h4>
+                    <p class="text-gray-400 mb-4">Subscribe for the latest updates</p>
+                    <form>
+                        <div class="flex">
+                            <input type="email" placeholder="Your email" class="bg-darker-bg text-white px-4 py-2 rounded-l-lg flex-grow focus:outline-none focus:ring-1 focus:ring-custom-purple border border-gray-700">
+                            <button type="submit" class="bg-custom-purple hover:bg-opacity-80 transition-colors text-white px-4 py-2 rounded-r-lg">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </form>
+                    <p class="text-sm text-gray-500 mt-4">By subscribing, you agree to our Privacy Policy and consent to receive updates from us.</p>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500">&copy; 2023 Organika Sessions. All rights reserved.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="text-gray-500 hover:text-gray-300 transition-colors text-sm">Privacy Policy</a>
+                    <a href="#" class="text-gray-500 hover:text-gray-300 transition-colors text-sm">Terms of Service</a>
+                    <a href="#" class="text-gray-500 hover:text-gray-300 transition-colors text-sm">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple JS for mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.querySelector('.md\\:hidden button');
+            const nav = document.querySelector('nav');
+            
+            if (mobileMenuButton && nav) {
+                mobileMenuButton.addEventListener('click', function() {
+                    nav.classList.toggle('hidden');
+                    nav.classList.toggle('flex');
+                    nav.classList.toggle('flex-col');
+                    nav.classList.toggle('absolute');
+                    nav.classList.toggle('top-16');
+                    nav.classList.toggle('right-6');
+                    nav.classList.toggle('bg-custom-dark');
+                    nav.classList.toggle('p-4');
+                    nav.classList.toggle('rounded-lg');
+                    nav.classList.toggle('shadow-lg');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
