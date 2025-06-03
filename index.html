@@ -323,65 +323,105 @@
 
     <div class="section-divider"></div>
 
-    <!-- Podcast Section -->
-    <section id="podcasts" class="py-20 px-6 bg-gradient-custom">
-        <div class="container mx-auto">
-            <h2 class="text-4xl font-bold mb-12 text-center">
-                <span class="text-custom-purple">Pod</span><span class="text-custom-teal">casts</span>
-            </h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Podcast 1 -->
-              <div class="card rounded-lg overflow-hidden">
-        <!-- Embedded Mixcloud Player -->
-        <div class="rounded-md overflow-hidden mb-4">
-            <iframe width="100%" height="400" src="https://player-widget.mixcloud.com/widget/iframe/?feed=%2FJunglistCL%2Forganika-sessions-presents-the-flavours-mixtape-vol-ii-feat-order-by-date-cl%2F" frameborder="0" allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share;" ></iframe>        </div>    <div class="p-6">
-        <h3 class="text-xl font-semibold mb-2">The Flavours Mixtape Vol II</h3>
-        <p class="text-gray-400 mb-4">Viaje de deep organic house con melodías etéreas y ritmos tribales</p>
-        <div class="mt-4 flex justify-between items-center">
-            <span class="text-sm text-gray-400">By Order By Date</span>
-            <div class="flex space-x-2">
-                <i class="fas fa-heart text-custom-purple cursor-pointer"></i>
-                <i class="fas fa-share-alt text-custom-teal cursor-pointer"></i>
-                <i class="fas fa-download text-gray-400 cursor-pointer"></i>
-            </div>
-        </div>
-    </div>          
-                <!-- Podcast 2 -->
-              <div class="card rounded-lg overflow-hidden">
-        <!-- Embedded Mixcloud Player -->
-        <div class="rounded-md overflow-hidden mb-4">
-            <iframe width="100%" height="400" src="https://player-widget.mixcloud.com/widget/iframe/?feed=%2FJunglistCL%2Finti-parini-live-at-organika-sessions-02feb2025%2F" frameborder="0" allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share;" ></iframe>
-            <h3 class="text-xl font-semibold mb-2">Live at Organika Sessions XL</h3>
-        <p class="text-gray-400 mb-4">Viaje de deep organic house con melodías etéreas y ritmos tribales</p>
-        <div class="mt-4 flex justify-between items-center">
-            <span class="text-sm text-gray-400">By Inti Parini</span>
-            <div class="flex space-x-2">
-                <i class="fas fa-heart text-custom-purple cursor-pointer"></i>
-                <i class="fas fa-share-alt text-custom-teal cursor-pointer"></i>
-                <i class="fas fa-download text-gray-400 cursor-pointer"></i>
-            </div>
-        </div>
-    </div>           
-                <!-- Podcast 3 -->
-              <div class="card rounded-lg overflow-hidden">
-        <!-- Embedded Mixcloud Player -->
-        <div class="rounded-md overflow-hidden mb-4">
-            <iframe width="100%" height="400" src="https://player-widget.mixcloud.com/widget/iframe/?feed=%2FJunglistCL%2Fdj-viviane-live-at-organika-sessions-25022025%2F" frameborder="0" allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share;" ></iframe>
-        <h3 class="text-xl font-semibold mb-2">Live at Organika Sessions XL</h3>
-        <p class="text-gray-400 mb-4">Viaje de deep organic house con melodías etéreas y ritmos tribales</p>
-        <div class="mt-4 flex justify-between items-center">
-            <span class="text-sm text-gray-400">By Dj Viviane</span>
-            <div class="flex space-x-2">
-                <i class="fas fa-heart text-custom-purple cursor-pointer"></i>
-                <i class="fas fa-share-alt text-custom-teal cursor-pointer"></i>
-                <i class="fas fa-download text-gray-400 cursor-pointer"></i>
-            </div>
-        </div>
-    </div>          
-    </section>
+<!-- Podcast Section -->
+<section id="podcasts" class="py-20 px-6 bg-gradient-custom">
+  <div class="container mx-auto">
+    <h2 class="text-4xl font-bold mb-12 text-center">
+      <span class="text-custom-purple">Pod</span><span class="text-custom-teal">casts</span>
+    </h2>
 
-    <div class="section-divider"></div>
+    <div class="relative">
+      <!-- Carousel Wrapper -->
+      <div id="carousel" class="flex overflow-x-hidden space-x-6 transition-all duration-500">
+        
+        <!-- Podcast 1 -->
+        <div class="card rounded-lg overflow-hidden min-w-[32%]">
+          <div class="rounded-md overflow-hidden mb-4">
+            <iframe width="100%" height="200" src="https://player-widget.mixcloud.com/widget/iframe/?feed=%2FJunglistCL%2Finti-parini-live-at-organika-sessions-02feb2025%2F" frameborder="0" allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share;"></iframe>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-semibold mb-2">Organika Sessions #042</h3>
+            <p class="text-gray-400 mb-4">Viaje de deep organic house con melodías etéreas y ritmos tribales</p>
+            <div class="mt-4 flex justify-between items-center">
+              <span class="text-sm text-gray-400">By Inti Parini</span>
+              <div class="flex space-x-2">
+                <i class="fas fa-heart text-custom-purple cursor-pointer"></i>
+                <i class="fas fa-share-alt text-custom-teal cursor-pointer"></i>
+                <i class="fas fa-download text-gray-400 cursor-pointer"></i>
+              </div>
+            </div>
+          </div>
+        </div>
 
+        <!-- Podcast 2 -->
+        <div class="card rounded-lg overflow-hidden min-w-[32%]">
+          <div class="h-48 bg-gradient-to-br from-custom-teal to-custom-purple relative">
+            <div class="absolute inset-0 flex items-center justify-center">
+              <i class="fas fa-play-circle text-6xl text-white opacity-80 hover:opacity-100 cursor-pointer transition-opacity"></i>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-semibold mb-2">Organika Sessions #041</h3>
+            <p class="text-gray-400 mb-4">Progressive beats with forest-inspired soundscapes</p>
+            <div class="mt-4 flex justify-between items-center">
+              <span class="text-sm text-gray-400">By Eco-Vibrations</span>
+              <div class="flex space-x-2">
+                <i class="fas fa-heart text-custom-purple cursor-pointer"></i>
+                <i class="fas fa-share-alt text-custom-teal cursor-pointer"></i>
+                <i class="fas fa-download text-gray-400 cursor-pointer"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Podcast 3 -->
+        <div class="card rounded-lg overflow-hidden min-w-[32%]">
+          <div class="h-48 bg-gradient-to-br from-purple-700 to-teal-500 relative">
+            <div class="absolute inset-0 flex items-center justify-center">
+              <i class="fas fa-play-circle text-6xl text-white opacity-80 hover:opacity-100 cursor-pointer transition-opacity"></i>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-semibold mb-2">Organika Sessions #040</h3>
+            <p class="text-gray-400 mb-4">Melodic techno with ambient textures and organic percussion</p>
+            <div class="mt-4 flex justify-between items-center">
+              <span class="text-sm text-gray-400">By Terra Form</span>
+              <div class="flex space-x-2">
+                <i class="fas fa-heart text-custom-purple cursor-pointer"></i>
+                <i class="fas fa-share-alt text-custom-teal cursor-pointer"></i>
+                <i class="fas fa-download text-gray-400 cursor-pointer"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Add more podcast cards here with same structure -->
+
+      </div>
+
+      <!-- Navigation Buttons -->
+      <div class="absolute top-1/2 left-0 transform -translate-y-1/2 z-10">
+        <button onclick="slideCarousel(-1)" class="text-white bg-custom-teal bg-opacity-60 hover:bg-opacity-80 rounded-full p-3">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+      </div>
+      <div class="absolute top-1/2 right-0 transform -translate-y-1/2 z-10">
+        <button onclick="slideCarousel(1)" class="text-white bg-custom-teal bg-opacity-60 hover:bg-opacity-80 rounded-full p-3">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="text-center mt-12">
+      <a href="#" class="btn-custom px-8 py-3 rounded-full font-semibold text-lg inline-flex items-center">
+        <span>Ver Todos los Podcasts</span>
+        <i class="fas fa-angle-right ml-2"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
     <!-- Destacados Section -->
     <section id="artists" class="py-20 px-6 relative overflow-hidden">
         <div class="leaf-decoration leaf-bottom-left"></div>
