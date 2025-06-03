@@ -330,9 +330,10 @@
       <span class="text-custom-purple">Pod</span><span class="text-custom-teal">casts</span>
     </h2>
 
-    <div class="relative">
-      <!-- Carousel Wrapper -->
-      <div id="carousel" class="flex overflow-x-hidden space-x-6 transition-all duration-500">
+    <!-- Carousel Container -->
+    <div class="relative overflow-hidden">
+      <!-- Carousel Track -->
+      <div id="carousel" class="flex transition-all duration-500 space-x-6 w-max">
         
         <!-- Podcast 1 -->
         <div class="card rounded-lg overflow-hidden min-w-[32%]">
@@ -355,7 +356,7 @@
         <!-- Podcast 2 -->
         <div class="card rounded-lg overflow-hidden min-w-[32%]">
           <div class="rounded-md overflow-hidden mb-4">
-            <iframe width="100%" height="300" src="https://player-widget.mixcloud.com/widget/iframe/?feed=%2FJunglistCL%2Fdj-viviane-live-at-organika-sessions-25022025%2F" frameborder="0" allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share;" ></iframe>
+            <iframe width="100%" height="300" src="https://player-widget.mixcloud.com/widget/iframe/?feed=%2FJunglistCL%2Fdj-viviane-live-at-organika-sessions-25022025%2F" frameborder="0" allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share;"></iframe>
           </div>
           <div class="p-6">
             <h3 class="text-xl font-semibold mb-2">Organika Sessions XL Live</h3>
@@ -369,10 +370,11 @@
             </div>
           </div>
         </div>
+
         <!-- Podcast 3 -->
         <div class="card rounded-lg overflow-hidden min-w-[32%]">
           <div class="rounded-md overflow-hidden mb-4">
-            <iframe width="100%" height="400" src="https://player-widget.mixcloud.com/widget/iframe/?feed=%2FJunglistCL%2Flil-jahn-live-at-organika-sessions-xl-22feb25%2F" frameborder="0" allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share;" ></iframe>
+            <iframe width="100%" height="400" src="https://player-widget.mixcloud.com/widget/iframe/?feed=%2FJunglistCL%2Flil-jahn-live-at-organika-sessions-xl-22feb25%2F" frameborder="0" allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share;"></iframe>
           </div>
           <div class="p-6">
             <h3 class="text-xl font-semibold mb-2">Organika Sessions XL Live</h3>
@@ -386,10 +388,11 @@
             </div>
           </div>
         </div>
+
         <!-- Podcast 4 -->
         <div class="card rounded-lg overflow-hidden min-w-[32%]">
           <div class="rounded-md overflow-hidden mb-4">
-            <iframe width="100%" height="300" src="https://player-widget.mixcloud.com/widget/iframe/?feed=%2FJunglistCL%2Forganika-sessions-presents-the-flavours-mixtape-vol-ii-feat-order-by-date-cl%2F" frameborder="0" allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share;" ></iframe>
+            <iframe width="100%" height="300" src="https://player-widget.mixcloud.com/widget/iframe/?feed=%2FJunglistCL%2Forganika-sessions-presents-the-flavours-mixtape-vol-ii-feat-order-by-date-cl%2F" frameborder="0" allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share;"></iframe>
           </div>
           <div class="p-6">
             <h3 class="text-xl font-semibold mb-2">The Flavours Mixtape Vol II</h3>
@@ -403,10 +406,11 @@
             </div>
           </div>
         </div>
+
         <!-- Podcast 5 -->
         <div class="card rounded-lg overflow-hidden min-w-[32%]">
           <div class="rounded-md overflow-hidden mb-4">
-            <iframe width="100%" height="300" src="https://player-widget.mixcloud.com/widget/iframe/?feed=%2FJunglistCL%2Fdj-junglesoul-live-at-organika-sessions-ft-cerveza-lunatica-08112024%2F" frameborder="0" allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share;" ></iframe>
+            <iframe width="100%" height="300" src="https://player-widget.mixcloud.com/widget/iframe/?feed=%2FJunglistCL%2Fdj-junglesoul-live-at-organika-sessions-ft-cerveza-lunatica-08112024%2F" frameborder="0" allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share;"></iframe>
           </div>
           <div class="p-6">
             <h3 class="text-xl font-semibold mb-2">Organika Sessions Live at Cerveza Lunatica</h3>
@@ -420,10 +424,11 @@
             </div>
           </div>
         </div>
+
         <!-- Podcast 6 -->
         <div class="card rounded-lg overflow-hidden min-w-[32%]">
           <div class="rounded-md overflow-hidden mb-4">
-            <iframe width="100%" height="300" src="https://player-widget.mixcloud.com/widget/iframe/?feed=%2Forganikasessions%2Fdj-frantik-presenta-organika-sessions-vol-i%2F" frameborder="0" allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share;" ></iframe>
+            <iframe width="100%" height="300" src="https://player-widget.mixcloud.com/widget/iframe/?feed=%2Forganikasessions%2Fdj-frantik-presenta-organika-sessions-vol-i%2F" frameborder="0" allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share;"></iframe>
           </div>
           <div class="p-6">
             <h3 class="text-xl font-semibold mb-2">Organika Sessions Vol I</h3>
@@ -437,7 +442,6 @@
             </div>
           </div>
         </div>
-        <!-- Add more podcast cards here with same structure -->
 
       </div>
 
@@ -464,6 +468,7 @@
 </section>
 
 <div class="section-divider"></div>
+
     <!-- Destacados Section -->
     <section id="artists" class="py-20 px-6 relative overflow-hidden">
         <div class="leaf-decoration leaf-bottom-left"></div>
@@ -1058,16 +1063,30 @@
         });
     </script>
 </body>
-    <script>
-  let scrollPos = 0;
+   <script>
+  let currentSlide = 0;
+  const visibleCards = 3;
   const carousel = document.getElementById('carousel');
-  const cardWidth = carousel.children[0].offsetWidth + 24; // card width + gap
+  const cards = carousel.children;
+  const totalCards = cards.length;
+  const cardMargin = 24; // Tailwind gap-6 = 1.5rem = 24px
+
+  function getCardWidth() {
+    return cards[0].offsetWidth + cardMargin;
+  }
 
   function slideCarousel(direction) {
-    scrollPos += direction * cardWidth;
-    scrollPos = Math.max(0, scrollPos); // prevent scrolling left too far
-    carousel.scrollTo({ left: scrollPos, behavior: 'smooth' });
+    const maxSlide = Math.ceil(totalCards / visibleCards) - 1;
+    currentSlide = Math.max(0, Math.min(currentSlide + direction, maxSlide));
+    const shift = getCardWidth() * visibleCards * currentSlide;
+    carousel.style.transform = `translateX(-${shift}px)`;
   }
+
+  window.addEventListener('resize', () => {
+    const shift = getCardWidth() * visibleCards * currentSlide;
+    carousel.style.transform = `translateX(-${shift}px)`;
+  });
 </script>
+
 
 </html>
