@@ -333,10 +333,10 @@
     <!-- Carousel Container -->
     <div class="relative overflow-hidden">
       <!-- Carousel Track -->
-      <div id="carousel" class="flex transition-all duration-500 space-x-6 w-max">
+        <div id="carousel" class="flex transition-transform duration-500 w-full">
         
         <!-- Podcast 1 -->
-        <div class="card rounded-lg overflow-hidden min-w-[32%]">
+        <div class="card rounded-lg overflow-hidden w-1/3 flex-shrink-0">
           <div class="rounded-md overflow-hidden mb-4">
             <iframe width="100%" height="300" src="https://player-widget.mixcloud.com/widget/iframe/?feed=%2FJunglistCL%2Finti-parini-live-at-organika-sessions-02feb2025%2F" frameborder="0" allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share;"></iframe>
           </div>
@@ -354,7 +354,7 @@
         </div>
 
         <!-- Podcast 2 -->
-        <div class="card rounded-lg overflow-hidden min-w-[32%]">
+        <div class="card rounded-lg overflow-hidden w-1/3 flex-shrink-0">
           <div class="rounded-md overflow-hidden mb-4">
             <iframe width="100%" height="300" src="https://player-widget.mixcloud.com/widget/iframe/?feed=%2FJunglistCL%2Fdj-viviane-live-at-organika-sessions-25022025%2F" frameborder="0" allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share;"></iframe>
           </div>
@@ -372,7 +372,7 @@
         </div>
 
         <!-- Podcast 3 -->
-        <div class="card rounded-lg overflow-hidden min-w-[32%]">
+        <div class="card rounded-lg overflow-hidden w-1/3 flex-shrink-0">
           <div class="rounded-md overflow-hidden mb-4">
             <iframe width="100%" height="400" src="https://player-widget.mixcloud.com/widget/iframe/?feed=%2FJunglistCL%2Flil-jahn-live-at-organika-sessions-xl-22feb25%2F" frameborder="0" allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share;"></iframe>
           </div>
@@ -390,7 +390,7 @@
         </div>
 
         <!-- Podcast 4 -->
-        <div class="card rounded-lg overflow-hidden min-w-[32%]">
+        <div class="card rounded-lg overflow-hidden w-1/3 flex-shrink-0">
           <div class="rounded-md overflow-hidden mb-4">
             <iframe width="100%" height="300" src="https://player-widget.mixcloud.com/widget/iframe/?feed=%2FJunglistCL%2Forganika-sessions-presents-the-flavours-mixtape-vol-ii-feat-order-by-date-cl%2F" frameborder="0" allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share;"></iframe>
           </div>
@@ -408,7 +408,7 @@
         </div>
 
         <!-- Podcast 5 -->
-        <div class="card rounded-lg overflow-hidden min-w-[32%]">
+        <div class="card rounded-lg overflow-hidden w-1/3 flex-shrink-0">
           <div class="rounded-md overflow-hidden mb-4">
             <iframe width="100%" height="300" src="https://player-widget.mixcloud.com/widget/iframe/?feed=%2FJunglistCL%2Fdj-junglesoul-live-at-organika-sessions-ft-cerveza-lunatica-08112024%2F" frameborder="0" allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share;"></iframe>
           </div>
@@ -426,7 +426,7 @@
         </div>
 
         <!-- Podcast 6 -->
-        <div class="card rounded-lg overflow-hidden min-w-[32%]">
+        <div class="card rounded-lg overflow-hidden w-1/3 flex-shrink-0">
           <div class="rounded-md overflow-hidden mb-4">
             <iframe width="100%" height="300" src="https://player-widget.mixcloud.com/widget/iframe/?feed=%2Forganikasessions%2Fdj-frantik-presenta-organika-sessions-vol-i%2F" frameborder="0" allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share;"></iframe>
           </div>
@@ -1065,7 +1065,7 @@
 </body>
    <script>
   let currentSlide = 0;
-  const visibleCards = 4;
+  const visibleCards = 3;
   const carousel = document.getElementById('carousel');
   const cards = carousel.children;
   const totalCards = cards.length;
