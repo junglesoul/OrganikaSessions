@@ -1008,4 +1008,16 @@
         });
     </script>
 </body>
+    <script>
+  let scrollPos = 0;
+  const carousel = document.getElementById('carousel');
+  const cardWidth = carousel.children[0].offsetWidth + 24; // card width + gap
+
+  function slideCarousel(direction) {
+    scrollPos += direction * cardWidth;
+    scrollPos = Math.max(0, scrollPos); // prevent scrolling left too far
+    carousel.scrollTo({ left: scrollPos, behavior: 'smooth' });
+  }
+</script>
+
 </html>
