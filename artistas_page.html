@@ -1,37 +1,259 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Artistas - Organika Sessions</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet" />
-  <style>
-    body {
-      font-family: 'Montserrat', sans-serif;
-      background: linear-gradient(to bottom right, #0f0f0f, #1a1a1a);
-      color: #f5f5f5;
-      cursor: url('cursor.png'), auto;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organika Sessions - Fiestas de música electrónica</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <!-- Swiper Styles -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <!-- Swiper Script -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <style>
+        :root {
+            --primary-purple: #8f78a8;
+            --secondary-teal: #2aa99d;
+            --dark-bg: #121212;
+            --darker-bg: #0a0a0a;
+            --light-text: #f5f5f5;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+            line-height: 1.6;
+        }
+        
+        .bg-custom-dark {
+            background-color: var(--darker-bg);
+        }
+        
+        .bg-custom-purple {
+            background-color: var(--primary-purple);
+        }
+        
+        .bg-custom-teal {
+            background-color: var(--secondary-teal);
+        }
+        
+        .text-custom-purple {
+            color: var(--primary-purple);
+        }
+        
+        .text-custom-teal {
+            color: var(--secondary-teal);
+        }
+        
+        .border-custom-purple {
+            border-color: var(--primary-purple);
+        }
+        
+        .border-custom-teal {
+            border-color: var(--secondary-teal);
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(10, 10, 10, 0.7), rgba(10, 10, 10, 0.9)), url('https://page1.genspark.site/v1/base64_upload/4632e77b70f0f93b707957a6ad1a951d');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 40%, rgba(42, 169, 157, 0.2), transparent 70%),
+                        radial-gradient(circle at 70% 60%, rgba(143, 120, 168, 0.2), transparent 70%);
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .leaf-decoration {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: url('https://page1.genspark.site/v1/base64_upload/4632e77b70f0f93b707957a6ad1a951d') no-repeat center;
+            background-size: contain;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .leaf-top-right {
+            top: -50px;
+            right: -50px;
+            transform: rotate(45deg);
+        }
+        
+        .leaf-bottom-left {
+            bottom: -50px;
+            left: -50px;
+            transform: rotate(-135deg);
+        }
+        
+        .section-divider {
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary-purple), var(--secondary-teal), transparent);
+            margin: 3rem auto;
+            width: 80%;
+        }
+        
+        .card {
+            transition: all 0.3s ease;
+            background: rgba(18, 18, 18, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(143, 120, 168, 0.2);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(42, 169, 157, 0.3);
+            border-color: var(--secondary-teal);
+        }
+        
+        .nav-link {
+            position: relative;
+            padding-bottom: 5px;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(90deg, var(--primary-purple), var(--secondary-teal));
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .btn-custom {
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-teal));
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-custom:hover {
+            background: linear-gradient(135deg, var(--secondary-teal), var(--primary-purple));
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(42, 169, 157, 0.4);
+        }
+        
+        .footer {
+            background: var(--darker-bg);
+            border-top: 1px solid rgba(143, 120, 168, 0.3);
+        }
+        
+        .glow {
+            box-shadow: 0 0 15px rgba(42, 169, 157, 0.5);
+        }
+        
+        .podcast-player {
+            background: rgba(18, 18, 18, 0.5);
+            border: 1px solid rgba(143, 120, 168, 0.3);
+            backdrop-filter: blur(5px);
+        }
+        
+        .gallery-item {
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .gallery-item img {
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(10, 10, 10, 0.2), rgba(42, 169, 157, 0.5));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .bg-gradient-custom {
+            background: linear-gradient(135deg, rgba(143, 120, 168, 0.1), rgba(42, 169, 157, 0.1));
+        }
+        
+        .internal-page-card {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .internal-page-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(143, 120, 168, 0.2), rgba(42, 169, 157, 0.2));
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .internal-page-card:hover::before {
+            opacity: 1;
+        }
+        
+        .internal-page-content {
+            position: relative;
+            z-index: 2;
+        }
+         /* Hide scrollbar */
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
     }
-    .text-custom-purple { color: #8f78a8; }
-    .text-custom-teal { color: #2aa99d; }
-    .bg-custom-dark { background-color: #0a0a0a; }
-    .btn-custom {
-      background: linear-gradient(135deg, #8f78a8, #2aa99d);
-      color: white;
-      transition: all 0.3s ease;
+    .scrollbar-hide {
+      -ms-overflow-style: none; /* IE and Edge */
+      scrollbar-width: none; /* Firefox */
     }
-    .btn-custom:hover {
-      background: linear-gradient(135deg, #2aa99d, #8f78a8);
+
+    /* Optional: show scrollbar by default on larger screens */
+    @media (min-width: 768px) {
+      .scrollbar-default::-webkit-scrollbar {
+        display: initial;
+      }
+      .scrollbar-default {
+        -ms-overflow-style: auto;
+        scrollbar-width: auto;
+      }
     }
-    .card:hover {
-      transform: translateY(-4px);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.4);
-      cursor: pointer;
-    }
-  </style>
+    </style>
 </head>
 <body class="relative overflow-x-hidden">
   <div class="absolute inset-0 -z-10 bg-cover bg-center opacity-10" style="background-image: url('leaf-bg.png');"></div>
