@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frantik - Organika Sessions</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(to bottom right, #0f0f0f, #1a1a1a);
+      color: #f5f5f5;
+    }
+    .text-custom-purple { color: #8f78a8; }
+    .text-custom-teal { color: #2aa99d; }
+    .bg-custom-dark { background-color: #0a0a0a; }
+  </style>
+</head>
+<body>
+  <header class="bg-custom-dark py-4 px-6">
+    <div class="container mx-auto flex justify-between items-center">
+      <h1 class="text-3xl font-bold">
+        <a href="index.html">
+          <span class="text-custom-purple">organika</span><span class="text-white">sessions</span>
+        </a>
+      </h1>
+      <nav class="space-x-4 text-sm">
+        <a href="index.html#sobre" class="text-gray-300 hover:text-white">Sobre</a>
+        <a href="index.html#nosotros" class="text-gray-300 hover:text-white">Nosotros</a>
+        <a href="index.html#events" class="text-gray-300 hover:text-white">Eventos</a>
+        <a href="index.html#gallery" class="text-gray-300 hover:text-white">Galería</a>
+        <a href="artistas.html" class="text-custom-teal hover:text-white font-semibold">Artistas</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="py-20 px-6">
+    <div class="container mx-auto max-w-4xl">
+      <div class="bg-custom-dark p-8 rounded-lg shadow-lg">
+        <div class="flex flex-col md:flex-row gap-8 items-center">
+          <div class="w-full md:w-1/2">
+            <img src="Frantik.png" alt="Frantik" class="rounded-lg w-full h-auto object-cover">
+          </div>
+          <div class="w-full md:w-1/2">
+            <h2 class="text-4xl font-bold mb-4">Frantik</h2>
+            <p class="mb-4 text-gray-300">
+              Frantik es un productor y DJ que canaliza la energía de la música melódica con una estética minimalista. Su sonido se caracteriza por estructuras hipnóticas, capas ambientales y ritmos precisos. Cada presentación en vivo es una experiencia inmersiva que invita a la introspección. Frantik combina técnica refinada con una pasión por lo etéreo, cultivando una identidad sonora que desafía las normas del techno convencional.
+            </p>
+          </div>
+        </div>
+
+        <!-- Mixcloud Embed -->
+        <div class="mt-12">
+          <h3 class="text-2xl font-semibold text-custom-teal mb-4">Set Reciente</h3>
+          <div class="rounded-md overflow-hidden">
+            <iframe width="100%" height="400" src="https://player-widget.mixcloud.com/widget/iframe/?feed=%2FJunglistCL%2Ffrantik-live-at-organika-sessions-2025%2F" frameborder="0" allow="encrypted-media; fullscreen; autoplay; idle-detection; speaker-selection; web-share;"></iframe>
+          </div>
+        </div>
+
+        <!-- Instagram Grid -->
+        <div class="mt-12">
+          <h3 class="text-2xl font-semibold text-custom-purple mb-4">Instagram</h3>
+          <div class="text-sm text-gray-400 mb-2">Sigue a <a href="https://www.instagram.com/frantiknology/" class="text-custom-teal hover:text-white" target="_blank">@frantiknology</a> en Instagram</div>
+          <script async src="https://www.instagram.com/embed.js"></script>
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/frantiknology/" data-instgrm-version="14" style="margin: 0 auto; max-width:540px"></blockquote>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
