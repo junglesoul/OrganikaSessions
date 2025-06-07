@@ -811,101 +811,115 @@
   });
 </script>
     <!-- Gigs Section -->
-    <section id="gigs" class="py-20 px-6 bg-gradient-custom">
-        <div class="container mx-auto">
-            <h2 class="text-4xl font-bold mb-12 text-center">
-                <span class="text-custom-teal">Up</span><span class="text-custom-purple">coming</span> Gigs
-            </h2>
-            
-            <div class="overflow-x-auto">
-                <table class="w-full">
-                    <thead>
-                        <tr class="text-left border-b border-gray-700">
-                            <th class="py-4 px-6">Fecha</th>
-                            <th class="py-4 px-6">Evento</th>
-                            <th class="py-4 px-6">Ubicación</th>
-                            <th class="py-4 px-6">Destacados</th>
-                            <th class="py-4 px-6">Entradas</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Evento 1 -->
-                        <tr class="border-b border-gray-800 hover:bg-gray-900 transition-colors">
-                            <td class="py-4 px-6">
-                                <div class="font-medium">15 Oct 2023</div>
-                                <div class="text-gray-400 text-sm">9:00 PM - 4:00 AM</div>
-                            </td>
-                            <td class="py-4 px-6">
-                                <div class="font-medium text-custom-purple">Organika Sessions: Nocturnal</div>
-                                <div class="text-gray-400 text-sm">Deep house & melodic techno night</div>
-                            </td>
-                            <td class="py-4 px-6">
-                                <div class="font-medium">Techno Temple</div>
-                                <div class="text-gray-400 text-sm">Brooklyn, NY</div>
-                            </td>
-                            <td class="py-4 px-6">
-                                <div>DJ Naturalia, Eco-Vibrations, Terra Form</div>
-                            </td>
-                            <td class="py-4 px-6">
-                                <a href="#" class="btn-custom px-4 py-2 rounded-full text-sm">Buy Entradas</a>
-                            </td>
-                        </tr>
-                        
-                        <!-- Evento 2 -->
-                        <tr class="border-b border-gray-800 hover:bg-gray-900 transition-colors">
-                            <td class="py-4 px-6">
-                                <div class="font-medium">22 Oct 2023</div>
-                                <div class="text-gray-400 text-sm">2:00 PM - 9:00 PM</div>
-                            </td>
-                            <td class="py-4 px-6">
-                                <div class="font-medium text-custom-teal">Organika Coffee Session</div>
-                                <div class="text-gray-400 text-sm">Daytime organic electronic vibes</div>
-                            </td>
-                            <td class="py-4 px-6">
-                                <div class="font-medium">Organic Brew Co.</div>
-                                <div class="text-gray-400 text-sm">Austin, TX</div>
-                            </td>
-                            <td class="py-4 px-6">
-                                <div>Leaf Symphony, Morning Dew, Terra Form</div>
-                            </td>
-                            <td class="py-4 px-6">
-                                <a href="#" class="btn-custom px-4 py-2 rounded-full text-sm">Buy Entradas</a>
-                            </td>
-                        </tr>
-                        
-                        <!-- Evento 3 -->
-                        <tr class="border-b border-gray-800 hover:bg-gray-900 transition-colors">
-                            <td class="py-4 px-6">
-                                <div class="font-medium">5 Nov 2023</div>
-                                <div class="text-gray-400 text-sm">10:00 PM - 6:00 AM</div>
-                            </td>
-                            <td class="py-4 px-6">
-                                <div class="font-medium text-custom-purple">Organika Underground</div>
-                                <div class="text-gray-400 text-sm">Deep and minimal techno experience</div>
-                            </td>
-                            <td class="py-4 px-6">
-                                <div class="font-medium">Submerge Warehouse</div>
-                                <div class="text-gray-400 text-sm">Detroit, MI</div>
-                            </td>
-                            <td class="py-4 px-6">
-                                <div>Forest Mind, DJ Naturalia, Electronic Roots</div>
-                            </td>
-                            <td class="py-4 px-6">
-                                <a href="#" class="btn-custom px-4 py-2 rounded-full text-sm">Buy Entradas</a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            
-            <div class="text-center mt-12">
-                <a href="#" class="border-2 border-custom-teal text-white hover:bg-custom-teal hover:bg-opacity-20 transition-all px-8 py-3 rounded-full font-semibold text-lg inline-flex items-center">
-                    <span>Full Evento Calendar</span>
-                    <i class="fas fa-calendar-alt ml-2"></i>
-                </a>
-            </div>
-        </div>
-    </section>
+<section id="gigs" class="py-20 px-6 bg-gradient-custom relative">
+  <div class="container mx-auto relative">
+    <h2 class="text-4xl font-bold mb-12 text-center">
+      <span class="text-custom-teal">Up</span><span class="text-custom-purple">coming</span> Gigs
+    </h2>
+
+    <!-- Overlay Message -->
+    <div class="absolute inset-0 flex items-center justify-center z-10">
+      <div class="bg-black bg-opacity-60 backdrop-blur-sm px-6 py-4 rounded-lg">
+        <h3 class="text-2xl md:text-3xl font-bold text-white">Coming Soon</h3>
+      </div>
+    </div>
+
+    <!-- Start of blurred content -->
+    <div class="blur-sm pointer-events-none select-none relative z-0">
+
+      <div class="overflow-x-auto">
+        <table class="w-full">
+          <thead>
+            <tr class="text-left border-b border-gray-700">
+              <th class="py-4 px-6">Fecha</th>
+              <th class="py-4 px-6">Evento</th>
+              <th class="py-4 px-6">Ubicación</th>
+              <th class="py-4 px-6">Destacados</th>
+              <th class="py-4 px-6">Entradas</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Evento 1 -->
+            <tr class="border-b border-gray-800 hover:bg-gray-900 transition-colors">
+              <td class="py-4 px-6">
+                <div class="font-medium">15 Oct 2023</div>
+                <div class="text-gray-400 text-sm">9:00 PM - 4:00 AM</div>
+              </td>
+              <td class="py-4 px-6">
+                <div class="font-medium text-custom-purple">Organika Sessions: Nocturnal</div>
+                <div class="text-gray-400 text-sm">Deep house & melodic techno night</div>
+              </td>
+              <td class="py-4 px-6">
+                <div class="font-medium">Techno Temple</div>
+                <div class="text-gray-400 text-sm">Brooklyn, NY</div>
+              </td>
+              <td class="py-4 px-6">
+                <div>DJ Naturalia, Eco-Vibrations, Terra Form</div>
+              </td>
+              <td class="py-4 px-6">
+                <a href="#" class="btn-custom px-4 py-2 rounded-full text-sm">Buy Entradas</a>
+              </td>
+            </tr>
+
+            <!-- Evento 2 -->
+            <tr class="border-b border-gray-800 hover:bg-gray-900 transition-colors">
+              <td class="py-4 px-6">
+                <div class="font-medium">22 Oct 2023</div>
+                <div class="text-gray-400 text-sm">2:00 PM - 9:00 PM</div>
+              </td>
+              <td class="py-4 px-6">
+                <div class="font-medium text-custom-teal">Organika Coffee Session</div>
+                <div class="text-gray-400 text-sm">Daytime organic electronic vibes</div>
+              </td>
+              <td class="py-4 px-6">
+                <div class="font-medium">Organic Brew Co.</div>
+                <div class="text-gray-400 text-sm">Austin, TX</div>
+              </td>
+              <td class="py-4 px-6">
+                <div>Leaf Symphony, Morning Dew, Terra Form</div>
+              </td>
+              <td class="py-4 px-6">
+                <a href="#" class="btn-custom px-4 py-2 rounded-full text-sm">Buy Entradas</a>
+              </td>
+            </tr>
+
+            <!-- Evento 3 -->
+            <tr class="border-b border-gray-800 hover:bg-gray-900 transition-colors">
+              <td class="py-4 px-6">
+                <div class="font-medium">5 Nov 2023</div>
+                <div class="text-gray-400 text-sm">10:00 PM - 6:00 AM</div>
+              </td>
+              <td class="py-4 px-6">
+                <div class="font-medium text-custom-purple">Organika Underground</div>
+                <div class="text-gray-400 text-sm">Deep and minimal techno experience</div>
+              </td>
+              <td class="py-4 px-6">
+                <div class="font-medium">Submerge Warehouse</div>
+                <div class="text-gray-400 text-sm">Detroit, MI</div>
+              </td>
+              <td class="py-4 px-6">
+                <div>Forest Mind, DJ Naturalia, Electronic Roots</div>
+              </td>
+              <td class="py-4 px-6">
+                <a href="#" class="btn-custom px-4 py-2 rounded-full text-sm">Buy Entradas</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="text-center mt-12">
+        <a href="#" class="border-2 border-custom-teal text-white hover:bg-custom-teal hover:bg-opacity-20 transition-all px-8 py-3 rounded-full font-semibold text-lg inline-flex items-center">
+          <span>Full Evento Calendar</span>
+          <i class="fas fa-calendar-alt ml-2"></i>
+        </a>
+      </div>
+
+    </div>
+    <!-- End of blurred content -->
+
+  </div>
+</section>
 
     <div class="section-divider"></div>
 
