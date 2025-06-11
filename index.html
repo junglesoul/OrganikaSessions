@@ -1115,20 +1115,26 @@
                     <span class="text-custom-purple">Stay</span> in the <span class="text-custom-teal">Loop</span>
                 </h2>
                 <p class="text-center text-gray-300 mb-8">Suscribirse to our newsletter for exclusive podcast releases, event announcements, and special offers.</p>
-                <form class="max-w-xl mx-auto">
-                    <div class="flex flex-col md:flex-row gap-4">
-                        <input type="email" placeholder="Your email address" class="bg-darker-bg text-white px-4 py-3 rounded-full flex-grow focus:outline-none focus:ring-2 focus:ring-custom-purple border border-gray-700">
-                        <button type="submit" class="btn-custom px-6 py-3 rounded-full font-semibold">
-                            Suscribirse
-                        </button>
-                    </div>
-                    <div class="mt-4 text-center text-sm text-gray-400">
-                        <label class="flex items-center justify-center">
-                            <input type="checkbox" class="mr-2">
-                            <span>I agree to receive emails from Organika Sessions and accept the privacy policy</span>
-                        </label>
-                    </div>
-                </form>
+                <form action="https://formsubmit.co/youremail@yourdomain.com" method="POST" class="max-w-xl mx-auto">
+                  <input type="hidden" name="_captcha" value="false">
+                  <input type="hidden" name="_next" value="https://organikasessions.com/gracias.html">
+
+                  <div class="flex flex-col md:flex-row gap-4">
+                   <input type="email" name="email" required placeholder="Your email address"
+                      class="bg-darker-bg text-white px-4 py-3 rounded-full flex-grow focus:outline-none focus:ring-2 focus:ring-custom-purple border border-gray-700">
+                    <button type="submit" class="btn-custom px-6 py-3 rounded-full font-semibold">
+                  Suscribirse
+                    </button>
+                  </div>
+
+              <div class="mt-4 text-center text-sm text-gray-400">
+               <label class="flex items-center justify-center">
+              <input type="checkbox" class="mr-2" required>
+              <span>I agree to receive emails from Organika Sessions and accept the privacy policy</span>
+                </label>
+          </div>
+    </form>
+
             </div>
         </div>
     </section>
