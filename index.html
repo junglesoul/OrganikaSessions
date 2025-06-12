@@ -1264,10 +1264,10 @@
             
             <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
                 <p class="text-gray-500">&copy; 2025 Organika Sessions proudly produced by Step Up The Rave. All rights reserved.</p>
-                <div class="flex space-x-6 mt-4 md:mt-0">
-                    <a href="#" class="text-gray-500 hover:text-gray-300 transition-colors text-sm">Política de Privacidad</a>
-                    <button onclick="toggleModal(true)" class="text-gray-500 hover:text-gray-300 transition-colors text-sm underline">Términos del Servicio</button>
-                    <a href="#" class="text-gray-500 hover:text-gray-300 transition-colors text-sm">Política de Cookies</a>
+                <!-- Términos del Servicio -->
+                <button onclick="toggleModal('termsModal', true)" class="text-sm underline text-custom-teal hover:text-white">Términos del Servicio</button>
+                <!-- Políticas de Privacidad -->
+                    <button onclick="toggleModal('privacyModal', true)" class="text-sm underline text-custom-teal hover:text-white">Políticas de Privacidad</button>
                 </div>
             </div>
         </div>
@@ -1300,7 +1300,7 @@
   <!-- Modal Box -->
   <div class="bg-custom-dark text-white max-w-2xl w-full p-6 rounded-lg shadow-lg relative overflow-y-auto max-h-[80vh]">
     
-    <button onclick="toggleModal(false)" class="absolute top-3 right-4 text-gray-400 hover:text-white text-2xl">&times;</button>
+    <button onclick="toggleModal('termsModal', false)" class="absolute top-3 right-4 text-gray-400 hover:text-white text-2xl">&times;</button>
     
     <h2 class="text-2xl font-bold mb-4 text-custom-teal">Términos del Servicio</h2>
     
@@ -1317,23 +1317,46 @@
   </div>
 </div>
 <script>
-  function toggleModal(show) {
-    const modal = document.getElementById("termsModal");
-    if (show) {
-      modal.classList.remove("hidden");
-    } else {
-      modal.classList.add("hidden");
+  function toggleModal(id, show) {
+    const modal = document.getElementById(id);
+    if (modal) {
+      modal.classList.toggle("hidden", !show);
     }
   }
 
-  // Optional: close modal if user clicks outside the modal box
+  // Close if clicked outside
   window.addEventListener("click", function (e) {
-    const modal = document.getElementById("termsModal");
-    if (e.target === modal) {
-      toggleModal(false);
-    }
+    const modals = ["termsModal", "privacyModal"];
+    modals.forEach(id => {
+      const modal = document.getElementById(id);
+      if (modal && e.target === modal) {
+        modal.classList.add("hidden");
+      }
+    });
   });
 </script>
+<!-- Privacy Policy Modal -->
+<div id="privacyModal" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 hidden">
+  <div class="bg-custom-dark text-white max-w-2xl w-full p-6 rounded-lg shadow-lg relative overflow-y-auto max-h-[80vh]">
+
+    <button onclick="toggleModal('privacyModal', false)" class="absolute top-3 right-4 text-gray-400 hover:text-white text-2xl">&times;</button>
+
+    <h2 class="text-2xl font-bold mb-4 text-custom-teal">Políticas de Privacidad</h2>
+
+    <div class="space-y-4 text-sm text-gray-300">
+      <p>Tu privacidad es importante para nosotros. Al interactuar con Organika Sessions, aceptas el uso y tratamiento de tus datos bajo las siguientes condiciones:</p>
+      <ul class="list-disc ml-5 space-y-2">
+        <li>Solo recolectamos datos esenciales como nombre y correo electrónico para comunicaciones específicas.</li>
+        <li>No compartimos tu información con terceros sin tu consentimiento explícito.</li>
+        <li>Utilizamos servicios externos como formularios y Mixcloud, que tienen sus propias políticas de privacidad.</li>
+        <li>Puedes solicitar la eliminación de tus datos enviando un correo a <a href="mailto:info@organikasessions.com" class="text-custom-purple underline">info@organikasessions.com</a>.</li>
+      </ul>
+      <p>Revisamos y actualizamos nuestra política periódicamente para cumplir con normativas aplicables.</p>
+    </div>
+
+  </div>
+</div>
+
 
 </body>
    <script>
