@@ -1266,7 +1266,7 @@
                 <p class="text-gray-500">&copy; 2025 Organika Sessions proudly produced by Step Up The Rave. All rights reserved.</p>
                 <div class="flex space-x-6 mt-4 md:mt-0">
                     <a href="#" class="text-gray-500 hover:text-gray-300 transition-colors text-sm">Política de Privacidad</a>
-                    <a href="#" class="text-gray-500 hover:text-gray-300 transition-colors text-sm">Términos del Servicio</a>
+                    <button onclick="toggleModal(true)" class="text-gray-500 hover:text-gray-300 transition-colors text-sm underline">Términos del Servicio</button>
                     <a href="#" class="text-gray-500 hover:text-gray-300 transition-colors text-sm">Política de Cookies</a>
                 </div>
             </div>
@@ -1295,6 +1295,46 @@
             }
         });
     </script>
+    <!-- Modal Backdrop -->
+<div id="termsModal" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 hidden">
+  <!-- Modal Box -->
+  <div class="bg-custom-dark text-white max-w-2xl w-full p-6 rounded-lg shadow-lg relative overflow-y-auto max-h-[80vh]">
+    
+    <button onclick="toggleModal(false)" class="absolute top-3 right-4 text-gray-400 hover:text-white text-2xl">&times;</button>
+    
+    <h2 class="text-2xl font-bold mb-4 text-custom-teal">Términos del Servicio</h2>
+    
+    <div class="space-y-4 text-sm text-gray-300">
+      <p>Al utilizar nuestro sitio web y servicios, aceptas cumplir con las siguientes condiciones:</p>
+      <ul class="list-disc ml-5 space-y-2">
+        <li>Tu información personal será tratada con confidencialidad y no será compartida sin tu consentimiento.</li>
+        <li>El contenido publicado en Organika Sessions (imágenes, audio, texto) está protegido por derechos de autor.</li>
+        <li>No está permitido utilizar nuestro contenido con fines comerciales sin autorización escrita.</li>
+        <li>Nos reservamos el derecho de modificar estos términos sin previo aviso.</li>
+      </ul>
+      <p>Si tienes preguntas, contáctanos en <a href="mailto:info@organikasessions.com" class="text-custom-purple hover:underline">info@organikasessions.com</a>.</p>
+    </div>
+  </div>
+</div>
+<script>
+  function toggleModal(show) {
+    const modal = document.getElementById("termsModal");
+    if (show) {
+      modal.classList.remove("hidden");
+    } else {
+      modal.classList.add("hidden");
+    }
+  }
+
+  // Optional: close modal if user clicks outside the modal box
+  window.addEventListener("click", function (e) {
+    const modal = document.getElementById("termsModal");
+    if (e.target === modal) {
+      toggleModal(false);
+    }
+  });
+</script>
+
 </body>
    <script>
   let currentSlide = 0;
