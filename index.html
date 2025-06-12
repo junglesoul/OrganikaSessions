@@ -1282,6 +1282,17 @@
     </div>
   </div>
 </div>
+<div id="cookieBanner" class="fixed bottom-0 left-0 right-0 bg-custom-dark text-white p-4 shadow-lg z-50">
+  <div class="container mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
+    <p class="text-gray-300">
+      Usamos cookies para mejorar tu experiencia en Organika Sessions. Al continuar navegando, aceptas nuestra 
+      <button onclick="toggleModal('cookieModal', true)" class="underline text-custom-teal hover:text-white">Política de Cookies</button>.
+    </p>
+    <button onclick="acceptCookies()" class="bg-custom-teal hover:bg-opacity-80 text-white px-4 py-2 rounded-full font-semibold transition">
+      Aceptar
+    </button>
+  </div>
+</div>
 
 <!-- Privacy Modal -->
 <div id="privacyModal" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 hidden">
@@ -1299,6 +1310,22 @@
       <p>Revisamos y actualizamos nuestra política periódicamente para cumplir con normativas aplicables.</p>
     </div>
   </div>
+<div id="cookieModal" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 hidden">
+  <div class="bg-custom-dark text-white max-w-2xl w-full p-6 rounded-lg shadow-lg relative overflow-y-auto max-h-[80vh]">
+    <button onclick="toggleModal('cookieModal', false)" class="absolute top-3 right-4 text-gray-400 hover:text-white text-2xl">&times;</button>
+    <h2 class="text-2xl font-bold mb-4 text-custom-teal">Política de Cookies</h2>
+    <div class="space-y-4 text-sm text-gray-300">
+      <p>Utilizamos cookies para analizar el tráfico, mejorar la experiencia del usuario y personalizar contenido cuando sea necesario. Estas cookies no recolectan información personal identificable.</p>
+      <ul class="list-disc ml-5 space-y-2">
+        <li>Cookies funcionales: necesarias para el funcionamiento básico del sitio.</li>
+        <li>Cookies de rendimiento: nos ayudan a entender cómo interactúan los usuarios con el sitio.</li>
+        <li>No utilizamos cookies publicitarias o de terceros con fines comerciales.</li>
+      </ul>
+      <p>Al hacer clic en “Aceptar”, aceptas nuestra política de uso de cookies.</p>
+    </div>
+  </div>
+</div>
+
 </div>
 
 
@@ -1325,6 +1352,25 @@
   window.addEventListener('resize', () => {
     const shift = getCardWidth() * visibleCards * currentSlide;
     carousel.style.transform = `translateX(-${shift}px)`;
+  });
+</script>
+<script>
+  function toggleModal(id, show) {
+    const modal = document.getElementById(id);
+    if (modal) modal.classList.toggle("hidden", !show);
+  }
+
+  function acceptCookies() {
+    document.getElementById("cookieBanner").style.display = "none";
+    localStorage.setItem("cookiesAccepted", "true");
+  }
+
+  // Hide banner if already accepted
+  window.addEventListener("DOMContentLoaded", () => {
+    if (localStorage.getItem("cookiesAccepted") === "true") {
+      const banner = document.getElementById("cookieBanner");
+      if (banner) banner.style.display = "none";
+    }
   });
 </script>
 
