@@ -64,34 +64,41 @@
         <li>Terra Form</li>
       </ul>
 
-      <h3 class="text-2xl font-semibold mb-2 text-custom-teal">Precios</h3>
-      <ul class="mb-6 text-gray-300 list-disc list-inside">
-        <li>Entrada General: $20 USD</li>
-        <li>VIP con Meet & Greet: $40 USD</li>
-      </ul>
-
-      <!-- Ticket Form -->
-      <form id="ticketForm">
-        <div class="mb-4">
-          <label for="name" class="block text-sm font-semibold mb-2">Nombre completo</label>
-          <input type="text" id="name" name="name" required class="w-full px-4 py-3 bg-white text-black rounded-lg border border-gray-700">
-        </div>
-        <div class="mb-4">
-          <label for="email" class="block text-sm font-semibold mb-2">Email</label>
-          <input type="email" id="email" name="email" required class="w-full px-4 py-3 bg-white text-black rounded-lg border border-gray-700">
-        </div>
-        <div class="mb-4">
-          <label for="ticket" class="block text-sm font-semibold mb-2">Selecciona tu entrada</label>
-          <select id="event" name="event" class="w-full px-4 py-3 bg-white text-black rounded-lg border border-gray-700">
-            <option value="general">Entrada General - $20</option>
-            <option value="vip">Entrada VIP - $40</option>
-          </select>
-        </div>
-        <button type="submit" class="btn-custom bg-custom-teal hover:bg-opacity-80 text-white px-6 py-3 rounded-full font-semibold mt-4 w-full">Ir al Pago</button>
-      </form>
+      <h3 class="text-2xl font-semibold mb-4 text-custom-teal">Selecciona tu Entrada</h3>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <button onclick="openTicketModal('general')" class="bg-custom-teal text-white px-6 py-3 rounded-lg font-semibold hover:bg-opacity-80">General - $20</button>
+        <button onclick="openTicketModal('vip')" class="bg-custom-purple text-white px-6 py-3 rounded-lg font-semibold hover:bg-opacity-80">VIP - $40</button>
+      </div>
     </div>
   </div>
 </main>
+
+<!-- Ticket Modal -->
+<div id="ticketModal" class="fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center hidden">
+  <div class="bg-custom-dark p-6 rounded-lg max-w-2xl w-full relative overflow-y-auto max-h-[90vh]">
+    <button onclick="closeTicketModal()" class="absolute top-3 right-4 text-gray-400 hover:text-white text-2xl">&times;</button>
+    <h2 class="text-2xl font-bold mb-4 text-custom-teal">Detalles de tu Compra</h2>
+    <form id="ticketForm">
+      <input type="hidden" id="ticketType" name="ticketType">
+      <div class="grid gap-4 mb-4" id="ticketFields"></div>
+      <div class="mb-4">
+        <label for="ticketQuantity" class="block text-sm font-semibold mb-2">Cantidad de Entradas</label>
+        <input type="number" id="ticketQuantity" value="1" min="1" max="10" class="w-full px-4 py-3 bg-white text-black rounded-lg border border-gray-700" onchange="renderTicketFields()">
+      </div>
+      <div class="mb-4">
+        <label class="flex items-start text-sm">
+          <input type="checkbox" id="acceptTerms" required class="mr-2 mt-1"> Acepto los <a href="#" class="underline ml-1">Términos y Condiciones</a> de la compra.
+        </label>
+      </div>
+      <div class="mb-6">
+        <label class="flex items-start text-sm">
+          <input type="checkbox" id="newsletter" class="mr-2 mt-1"> Deseo recibir noticias y contenido promocional de Organika Sessions.
+        </label>
+      </div>
+      <button type="submit" class="btn-custom bg-custom-teal text-white px-6 py-3 rounded-full font-semibold w-full">Proceder al Pago</button>
+    </form>
+  </div>
+</div>
 
 <!-- Footer -->
 <footer class="footer py-12 px-6">
@@ -100,27 +107,67 @@
   </div>
 </footer>
 
-<!-- Ticket Form JS -->
+<!-- Script -->
 <script>
+  function openTicketModal(type) {
+    document.getElementById('ticketType').value = type;
+    document.getElementById('ticketQuantity').value = 1;
+    renderTicketFields();
+    document.getElementById('ticketModal').classList.remove('hidden');
+  }
+
+  function closeTicketModal() {
+    document.getElementById('ticketModal').classList.add('hidden');
+  }
+
+  function renderTicketFields() {
+    const container = document.getElementById('ticketFields');
+    const qty = parseInt(document.getElementById('ticketQuantity').value);
+    container.innerHTML = '';
+    for (let i = 1; i <= qty; i++) {
+      container.innerHTML += `
+        <div class="border-t border-gray-700 pt-4">
+          <h4 class="text-custom-purple font-semibold mb-2">Entrada ${i}</h4>
+          <input required name="name_${i}" placeholder="Nombre Completo" class="w-full mb-2 px-4 py-2 rounded-lg bg-white text-black border border-gray-700">
+          <input required name="phone_${i}" placeholder="Teléfono" class="w-full mb-2 px-4 py-2 rounded-lg bg-white text-black border border-gray-700">
+          <input required name="email_${i}" type="email" placeholder="Email" class="w-full mb-2 px-4 py-2 rounded-lg bg-white text-black border border-gray-700">
+          <input required name="rut_${i}" placeholder="RUT" class="w-full px-4 py-2 rounded-lg bg-white text-black border border-gray-700">
+        </div>
+      `;
+    }
+  }
+
   document.getElementById('ticketForm').addEventListener('submit', function (e) {
     e.preventDefault();
+    const ticketType = document.getElementById('ticketType').value;
+    const qty = parseInt(document.getElementById('ticketQuantity').value);
 
-    const name = document.getElementById('name').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const event = document.getElementById('event').value;
+    const data = {
+      ticketType,
+      quantity: qty,
+      newsletter: document.getElementById('newsletter').checked ? 'yes' : 'no',
+      _captcha: false
+    };
+
+    for (let i = 1; i <= qty; i++) {
+      data[`name_${i}`] = document.querySelector(`[name='name_${i}']`).value;
+      data[`phone_${i}`] = document.querySelector(`[name='phone_${i}']`).value;
+      data[`email_${i}`] = document.querySelector(`[name='email_${i}']`).value;
+      data[`rut_${i}`] = document.querySelector(`[name='rut_${i}']`).value;
+    }
 
     fetch("https://formsubmit.co/ajax/organikasessions@gmail.com", {
       method: "POST",
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, email, ticket: event, _captcha: false })
+      body: JSON.stringify(data)
     });
 
-    // Set Mercado Pago links
-    let mpLink = "";
-    if (event === "general") mpLink = "https://mpago.la/your-general-ticket-link";
-    if (event === "vip") mpLink = "https://mpago.la/your-vip-ticket-link";
+    const links = {
+      general: "https://mpago.la/your-general-ticket-link",
+      vip: "https://mpago.la/your-vip-ticket-link"
+    };
 
-    window.location.href = mpLink;
+    window.location.href = links[ticketType];
   });
 </script>
 
