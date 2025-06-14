@@ -22,7 +22,6 @@
 </head>
 <body>
 
-<!-- Header -->
 <header class="bg-custom-dark py-4 px-6">
   <div class="container mx-auto flex justify-between items-center">
     <h1 class="text-3xl font-bold">
@@ -42,12 +41,10 @@
 
 <main class="py-20 px-6">
   <div class="container mx-auto max-w-5xl">
-    <!-- Featured Image -->
     <div class="mb-10">
       <img src="Event1.png" alt="Organika Nocturnal" class="w-full h-auto rounded-lg shadow-md object-cover">
     </div>
 
-    <!-- Event Description -->
     <div class="bg-custom-dark p-8 rounded-lg shadow-lg">
       <h2 class="text-4xl font-bold mb-4 text-custom-purple">Organika Sessions: Nocturnal</h2>
       <p class="text-gray-300 mb-6">Sumérgete en una noche de sonidos profundos y atmósferas orgánicas con artistas internacionales y locales. Un espacio donde el ritmo conecta con la naturaleza interior.</p>
@@ -76,4 +73,102 @@
 </main>
 
 <!-- Ticket Modal -->
-<!-- (modal and scripts remain unchanged) -->
+<div id="ticketModal" class="fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center hidden">
+  <div class="bg-custom-dark p-6 rounded-lg max-w-2xl w-full relative overflow-y-auto max-h-[90vh]">
+    <button onclick="closeTicketModal()" class="absolute top-3 right-4 text-gray-400 hover:text-white text-2xl">&times;</button>
+    <h2 class="text-2xl font-bold mb-4 text-custom-teal">Detalles de tu Compra</h2>
+    <form id="ticketForm">
+      <input type="hidden" id="ticketType" name="ticketType">
+      <div class="grid gap-4 mb-4" id="ticketFields"></div>
+      <div class="mb-4">
+        <label for="ticketQuantity" class="block text-sm font-semibold mb-2">Cantidad de Entradas</label>
+        <input type="number" id="ticketQuantity" value="1" min="1" max="10" class="w-full px-4 py-3 bg-white text-black rounded-lg border border-gray-700" onchange="renderTicketFields()">
+      </div>
+      <div class="mb-4">
+        <label class="flex items-start text-sm">
+          <input type="checkbox" id="acceptTerms" required class="mr-2 mt-1">
+          Acepto los <a href="#" class="underline ml-1">Términos y Condiciones</a> de la compra.
+        </label>
+      </div>
+      <div class="mb-6">
+        <label class="flex items-start text-sm">
+          <input type="checkbox" id="newsletter" class="mr-2 mt-1">
+          Deseo recibir noticias y contenido promocional de Organika Sessions.
+        </label>
+      </div>
+      <button type="submit" class="btn-custom bg-custom-teal text-white px-6 py-3 rounded-full font-semibold w-full">Proceder al Pago</button>
+    </form>
+  </div>
+</div>
+
+<footer class="footer py-12 px-6">
+  <div class="container mx-auto text-center text-sm text-gray-400">
+    &copy; 2025 Organika Sessions. Todos los derechos reservados.
+  </div>
+</footer>
+
+<script>
+  function openTicketModal(type) {
+    document.getElementById('ticketType').value = type;
+    document.getElementById('ticketQuantity').value = 1;
+    renderTicketFields();
+    document.getElementById('ticketModal').classList.remove('hidden');
+  }
+
+  function closeTicketModal() {
+    document.getElementById('ticketModal').classList.add('hidden');
+  }
+
+  function renderTicketFields() {
+    const container = document.getElementById('ticketFields');
+    const qty = parseInt(document.getElementById('ticketQuantity').value);
+    container.innerHTML = '';
+    for (let i = 1; i <= qty; i++) {
+      container.innerHTML += `
+        <div class="border-t border-gray-700 pt-4">
+          <h4 class="text-custom-purple font-semibold mb-2">Entrada ${i}</h4>
+          <input required name="name_${i}" placeholder="Nombre Completo" class="w-full mb-2 px-4 py-2 rounded-lg bg-white text-black border border-gray-700">
+          <input required name="phone_${i}" placeholder="Teléfono" class="w-full mb-2 px-4 py-2 rounded-lg bg-white text-black border border-gray-700">
+          <input required name="email_${i}" type="email" placeholder="Email" class="w-full mb-2 px-4 py-2 rounded-lg bg-white text-black border border-gray-700">
+          <input required name="rut_${i}" placeholder="RUT" class="w-full px-4 py-2 rounded-lg bg-white text-black border border-gray-700">
+        </div>
+      `;
+    }
+  }
+
+  document.getElementById('ticketForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const ticketType = document.getElementById('ticketType').value;
+    const qty = parseInt(document.getElementById('ticketQuantity').value);
+    const data = {
+      ticketType,
+      quantity: qty,
+      newsletter: document.getElementById('newsletter').checked ? 'yes' : 'no',
+      _captcha: false
+    };
+
+    for (let i = 1; i <= qty; i++) {
+      data[`name_${i}`] = document.querySelector(`[name='name_${i}']`).value;
+      data[`phone_${i}`] = document.querySelector(`[name='phone_${i}']`).value;
+      data[`email_${i}`] = document.querySelector(`[name='email_${i}']`).value;
+      data[`rut_${i}`] = document.querySelector(`[name='rut_${i}']`).value;
+    }
+
+    fetch("https://formsubmit.co/ajax/organikasessions@gmail.com", {
+      method: "POST",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+
+    const links = {
+      general: "https://mpago.la/your-general-ticket-link",
+      vip: "https://mpago.la/your-vip-ticket-link"
+    };
+
+    window.location.href = links[ticketType];
+  });
+</script>
+
+</body>
+</html>
