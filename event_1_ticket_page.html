@@ -110,11 +110,39 @@
 
 <script>
   function openTicketModal(type) {
-    document.getElementById('ticketType').value = type;
-    document.getElementById('ticketQuantity').value = 1;
-    renderTicketFields();
-    document.getElementById('ticketModal').classList.remove('hidden');
+document.getElementById('ticketForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+
+  const ticketType = document.getElementById('ticketType').value;
+  const qty = parseInt(document.getElementById('ticketQuantity').value);
+  const data = {
+    ticketType,
+    quantity: qty,
+    newsletter: document.getElementById('newsletter').checked ? 'yes' : 'no',
+    _captcha: false
+  };
+
+  for (let i = 1; i <= qty; i++) {
+    data[`name_${i}`] = document.querySelector(`[name='name_${i}']`).value;
+    data[`phone_${i}`] = document.querySelector(`[name='phone_${i}']`).value;
+    data[`email_${i}`] = document.querySelector(`[name='email_${i}']`).value;
+    data[`rut_${i}`] = document.querySelector(`[name='rut_${i}']`).value;
   }
+
+  fetch("https://formsubmit.co/ajax/organikasessions@gmail.com", {
+    method: "POST",
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data) // ✅ FIXED LINE
+  });
+
+  const links = {
+    general: "https://mpago.la/your-general-ticket-link",
+    vip: "https://mpago.la/your-vip-ticket-link"
+  };
+
+  window.location.href = links[ticketType];
+});
+
 
   function closeTicketModal() {
     document.getElementById('ticketModal').classList.add('hidden');
