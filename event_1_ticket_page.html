@@ -88,7 +88,6 @@
         <label class="flex items-start text-sm">
           <input type="checkbox" id="acceptTerms" required class="mr-2 mt-1">
           Acepto los <a href="#" onclick="toggleModal('termsModal', true)" class="underline text-custom-teal ml-1">Términos y Condiciones de la compra.</a>
-
         </label>
       </div>
       <div class="mb-6">
@@ -110,39 +109,11 @@
 
 <script>
   function openTicketModal(type) {
-document.getElementById('ticketForm').addEventListener('submit', function (e) {
-  e.preventDefault();
-
-  const ticketType = document.getElementById('ticketType').value;
-  const qty = parseInt(document.getElementById('ticketQuantity').value);
-  const data = {
-    ticketType,
-    quantity: qty,
-    newsletter: document.getElementById('newsletter').checked ? 'yes' : 'no',
-    _captcha: false
-  };
-
-  for (let i = 1; i <= qty; i++) {
-    data[`name_${i}`] = document.querySelector(`[name='name_${i}']`).value;
-    data[`phone_${i}`] = document.querySelector(`[name='phone_${i}']`).value;
-    data[`email_${i}`] = document.querySelector(`[name='email_${i}']`).value;
-    data[`rut_${i}`] = document.querySelector(`[name='rut_${i}']`).value;
+    document.getElementById('ticketType').value = type;
+    document.getElementById('ticketQuantity').value = 1;
+    renderTicketFields();
+    document.getElementById('ticketModal').classList.remove('hidden');
   }
-
-  fetch("https://formsubmit.co/ajax/organikasessions@gmail.com", {
-    method: "POST",
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data) // ✅ FIXED LINE
-  });
-
-  const links = {
-    general: "https://mpago.la/your-general-ticket-link",
-    vip: "https://mpago.la/your-vip-ticket-link"
-  };
-
-  window.location.href = links[ticketType];
-});
-
 
   function closeTicketModal() {
     document.getElementById('ticketModal').classList.add('hidden');
@@ -187,25 +158,22 @@ document.getElementById('ticketForm').addEventListener('submit', function (e) {
     fetch("https://formsubmit.co/ajax/organikasessions@gmail.com", {
       method: "POST",
       headers: { 'Content-Type': 'application/json' },
-      : JSON.stringify(data)
+      body: JSON.stringify(data)
+    }).then(() => {
+      const links = {
+        general: "https://mpago.la/your-general-ticket-link",
+        vip: "https://mpago.la/your-vip-ticket-link"
+      };
+      window.location.href = links[ticketType];
     });
-
-    const links = {
-      general: "https://mpago.la/your-general-ticket-link",
-      vip: "https://mpago.la/your-vip-ticket-link"
-    };
-
-    window.location.href = links[ticketType];
   });
 </script>
+
 <!-- Términos y Condiciones Modal -->
 <div id="termsModal" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 hidden">
   <div class="bg-custom-dark text-white max-w-2xl w-full p-6 rounded-lg shadow-lg relative overflow-y-auto max-h-[80vh]">
-    
     <button onclick="toggleModal('termsModal', false)" class="absolute top-3 right-4 text-gray-400 hover:text-white text-2xl">&times;</button>
-    
     <h2 class="text-2xl font-bold mb-4 text-custom-teal">Términos y Condiciones de Compra</h2>
-    
     <div class="space-y-4 text-sm text-gray-300">
       <p>Al comprar una entrada a través de esta plataforma, usted acepta las siguientes condiciones de acuerdo a la legislación chilena:</p>
       <ul class="list-disc ml-5 space-y-2">
@@ -221,6 +189,7 @@ document.getElementById('ticketForm').addEventListener('submit', function (e) {
     </div>
   </div>
 </div>
+
 <script>
   function toggleModal(id, show) {
     const modal = document.getElementById(id);
@@ -229,7 +198,6 @@ document.getElementById('ticketForm').addEventListener('submit', function (e) {
     }
   }
 
-  // Optional: close modal on outside click
   window.addEventListener("click", function (e) {
     const modal = document.getElementById("termsModal");
     if (modal && e.target === modal) {
@@ -237,6 +205,7 @@ document.getElementById('ticketForm').addEventListener('submit', function (e) {
     }
   });
 </script>
+
 
 </body>
 </html>
