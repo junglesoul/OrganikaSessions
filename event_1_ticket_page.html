@@ -87,7 +87,8 @@
       <div class="mb-4">
         <label class="flex items-start text-sm">
           <input type="checkbox" id="acceptTerms" required class="mr-2 mt-1">
-          Acepto los <a href="#" class="underline ml-1">Términos y Condiciones</a> de la compra.
+          Acepto los <a href="#" onclick="toggleModal('termsModal', true)" class="underline text-custom-teal ml-1">Términos y Condiciones de la compra.</a>
+
         </label>
       </div>
       <div class="mb-6">
@@ -158,7 +159,7 @@
     fetch("https://formsubmit.co/ajax/organikasessions@gmail.com", {
       method: "POST",
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
+      : JSON.stringify(data)
     });
 
     const links = {
@@ -167,6 +168,45 @@
     };
 
     window.location.href = links[ticketType];
+  });
+</script>
+<!-- Términos y Condiciones Modal -->
+<div id="termsModal" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 hidden">
+  <div class="bg-custom-dark text-white max-w-2xl w-full p-6 rounded-lg shadow-lg relative overflow-y-auto max-h-[80vh]">
+    
+    <button onclick="toggleModal('termsModal', false)" class="absolute top-3 right-4 text-gray-400 hover:text-white text-2xl">&times;</button>
+    
+    <h2 class="text-2xl font-bold mb-4 text-custom-teal">Términos y Condiciones de Compra</h2>
+    
+    <div class="space-y-4 text-sm text-gray-300">
+      <p>Al comprar una entrada a través de esta plataforma, usted acepta las siguientes condiciones de acuerdo a la legislación chilena:</p>
+      <ul class="list-disc ml-5 space-y-2">
+        <li>La entrada es válida exclusivamente para el evento, fecha y ubicación indicados.</li>
+        <li>El reembolso del 100% del valor del ticket (exceptuando costos de servicio) se realizará únicamente si el evento es cancelado por parte de la producción.</li>
+        <li>Si el comprador cancela su asistencia, se reembolsará solo el 60% del valor del ticket, siempre que se solicite con al menos 48 horas de anticipación.</li>
+        <li>El 2% del total corresponde a costos de servicio de la plataforma y no es reembolsable bajo ninguna circunstancia.</li>
+        <li>Los tickets son personales e intransferibles. Intentos de reventa pueden invalidar el acceso.</li>
+        <li>Los asistentes deben presentar su identificación al ingreso junto con el ticket digital o impreso.</li>
+        <li>Organika Sessions se reserva el derecho de admisión y no se responsabiliza por objetos extraviados o daños ocasionados por terceros.</li>
+      </ul>
+      <p>Para dudas o consultas, escríbenos a <a href="mailto:organikasessions@gmail.com" class="text-custom-purple underline">organikasessions@gmail.com</a>.</p>
+    </div>
+  </div>
+</div>
+<script>
+  function toggleModal(id, show) {
+    const modal = document.getElementById(id);
+    if (modal) {
+      modal.classList.toggle("hidden", !show);
+    }
+  }
+
+  // Optional: close modal on outside click
+  window.addEventListener("click", function (e) {
+    const modal = document.getElementById("termsModal");
+    if (modal && e.target === modal) {
+      modal.classList.add("hidden");
+    }
   });
 </script>
 
