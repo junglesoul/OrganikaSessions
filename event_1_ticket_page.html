@@ -159,11 +159,16 @@
     const price = priceMap[ticketType] || 10000;
 
     try {
-      const res = await fetch("https://organika-sessions.vercel.app/api/create_preference", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ticketType, quantity: qty, price })
-      });
+const preferenceRes = await fetch("https://organika-sessions.vercel.app/api/create_preference", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    ticketType,
+    quantity: qty,
+    price
+  })
+});
+
 
       const data = await res.json();
 
