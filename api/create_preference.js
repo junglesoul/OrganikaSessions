@@ -1,24 +1,26 @@
-// /api/create_preference.js
-
 import mercadopago from 'mercadopago';
 
-// 🔐 Configure Mercado Pago with your access token from environment variable
 mercadopago.configure({
   access_token: process.env.MP_ACCESS_TOKEN,
 });
 
 export default async function handler(req, res) {
+  // ✅ Set CORS headers
+  res.setHeader("Access-Control-Allow-Origin", "https://organikasessions.com");
+  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
+  if (req.method === "OPTIONS") {
+    return res.status(200).end(); // Respond to preflight
+  }
+
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method Not Allowed' });
   }
 
   try {
-    // Vercel already parses req.body as JSON (unless raw body is used), so we avoid double parsing
-    const { ticketType, quantity, price } = req.body;
-
-    if (!ticketType || !quantity || !price) {
-      return res.status(400).json({ error: 'Missing required parameters' });
-    }
+    const body = req.body || await getRawBody(req);
+    const { ticketType, quantity, price } = typeof body === 'string' ? JSON.parse(body) : body;
 
     const preference = {
       items: [
@@ -30,9 +32,9 @@ export default async function handler(req, res) {
         },
       ],
       back_urls: {
-        success: 'https://organika-sessions.vercel.app/gracias.html',
-        failure: 'https://organika-sessions.vercel.app/error.html',
-        pending: 'https://organika-sessions.vercel.app/pendiente.html',
+        success: 'https://organikasessions.com/gracias.html',
+        failure: 'https://organikasessions.com/error.html',
+        pending: 'https://organikasessions.com/pendiente.html',
       },
       auto_return: 'approved',
     };
@@ -40,7 +42,16 @@ export default async function handler(req, res) {
     const response = await mercadopago.preferences.create(preference);
     return res.status(200).json({ id: response.body.id });
   } catch (error) {
-    console.error('❌ Error en create_preference:', error);
+    console.error('Error en create_preference:', error);
     return res.status(500).json({ error: 'Error interno al crear la preferencia' });
   }
+}
+
+async function getRawBody(req) {
+  return new Promise((resolve, reject) => {
+    let data = '';
+    req.on('data', chunk => (data += chunk));
+    req.on('end', () => resolve(data));
+    req.on('error', err => reject(err));
+  });
 }
