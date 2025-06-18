@@ -1,31 +1,53 @@
+// /api/create_preference.js
+
+import mercadopago from 'mercadopago';
+
+mercadopago.configure({
+  access_token: process.env.MP_ACCESS_TOKEN,
+});
+
 export default async function handler(req, res) {
-  const accessToken = "APP_USR-8571918509529689-061801-8c10b98675f51b4dc4ef2a19add22a83-457035567"; // Get this from Mercado Pago dashboard
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method Not Allowed' });
+  }
 
-  const { ticketType, quantity, price } = req.body;
+  try {
+    // Parse JSON manually if body is undefined
+    const body = req.body || await getRawBody(req);
 
-  const preference = {
-    items: [{
-      title: `Entrada ${ticketType}`,
-      quantity: Number(quantity),
-      currency_id: "CLP",
-      unit_price: Number(price)
-    }],
-    back_urls: {
-      success: "https://organikasessions.com/gracias.html",
-      failure: "https://organikasessions.com/error.html"
-    },
-    auto_return: "approved"
-  };
+    const { ticketType, quantity, price } = typeof body === 'string' ? JSON.parse(body) : body;
 
-  const response = await fetch("https://api.mercadopago.com/checkout/preferences", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(preference)
+    const preference = {
+      items: [
+        {
+          title: `Entrada ${ticketType}`,
+          quantity: Number(quantity),
+          unit_price: Number(price),
+          currency_id: 'CLP',
+        },
+      ],
+      back_urls: {
+        success: 'https://organika-sessions.vercel.app/gracias.html',
+        failure: 'https://organika-sessions.vercel.app/error.html',
+        pending: 'https://organika-sessions.vercel.app/pendiente.html',
+      },
+      auto_return: 'approved',
+    };
+
+    const response = await mercadopago.preferences.create(preference);
+    return res.status(200).json({ id: response.body.id });
+  } catch (error) {
+    console.error('Error en create_preference:', error);
+    return res.status(500).json({ error: 'Error interno al crear la preferencia' });
+  }
+}
+
+// Utility to parse raw body if needed
+async function getRawBody(req) {
+  return new Promise((resolve, reject) => {
+    let data = '';
+    req.on('data', chunk => (data += chunk));
+    req.on('end', () => resolve(data));
+    req.on('error', err => reject(err));
   });
-
-  const data = await response.json();
-  res.status(200).json({ id: data.id });
 }
