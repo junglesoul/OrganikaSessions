@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Organika Sessions: Nocturnal</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+  <script src="https://sdk.mercadopago.com/js/v2"></script>
   <style>
     body {
       font-family: 'Montserrat', sans-serif;
@@ -22,6 +23,7 @@
 </head>
 <body>
 
+<!-- Header -->
 <header class="bg-custom-dark py-4 px-6">
   <div class="container mx-auto flex justify-between items-center">
     <h1 class="text-3xl font-bold">
@@ -39,6 +41,7 @@
   </div>
 </header>
 
+<!-- Main -->
 <main class="py-20 px-6">
   <div class="container mx-auto max-w-5xl">
     <div class="mb-10">
@@ -101,12 +104,14 @@
   </div>
 </div>
 
+<!-- Footer -->
 <footer class="footer py-12 px-6">
   <div class="container mx-auto text-center text-sm text-gray-400">
     &copy; 2025 Organika Sessions. Todos los derechos reservados.
   </div>
 </footer>
 
+<!-- Modal Logic -->
 <script>
   function openTicketModal(type) {
     document.getElementById('ticketType').value = type;
@@ -120,8 +125,8 @@
   }
 
   function renderTicketFields() {
-    const container = document.getElementById('ticketFields');
     const qty = parseInt(document.getElementById('ticketQuantity').value);
+    const container = document.getElementById('ticketFields');
     container.innerHTML = '';
     for (let i = 1; i <= qty; i++) {
       container.innerHTML += `
@@ -136,36 +141,44 @@
     }
   }
 
-  document.getElementById('ticketForm').addEventListener('submit', function (e) {
+  // Initialize Mercado Pago
+  const mp = new MercadoPago("APP_USR-3644fa5d-6065-4c3e-8681-0960c0068dd8", {
+    locale: "es-CL"
+  });
+
+  // Submit handler
+  document.getElementById('ticketForm').addEventListener('submit', async function (e) {
     e.preventDefault();
 
     const ticketType = document.getElementById('ticketType').value;
     const qty = parseInt(document.getElementById('ticketQuantity').value);
-    const data = {
-      ticketType,
-      quantity: qty,
-      newsletter: document.getElementById('newsletter').checked ? 'yes' : 'no',
-      _captcha: false
+    const priceMap = {
+      general: 10000,
+      vip: 20000
     };
+    const price = priceMap[ticketType] || 10000;
 
-    for (let i = 1; i <= qty; i++) {
-      data[`name_${i}`] = document.querySelector(`[name='name_${i}']`).value;
-      data[`phone_${i}`] = document.querySelector(`[name='phone_${i}']`).value;
-      data[`email_${i}`] = document.querySelector(`[name='email_${i}']`).value;
-      data[`rut_${i}`] = document.querySelector(`[name='rut_${i}']`).value;
+    try {
+      const res = await fetch("https://organika-sessions.vercel.app/api/create_preference", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ticketType, quantity: qty, price })
+      });
+
+      const data = await res.json();
+
+      if (data && data.id) {
+        mp.checkout({
+          preference: { id: data.id },
+          autoOpen: true
+        });
+      } else {
+        alert("No se pudo iniciar el pago. Intenta nuevamente.");
+      }
+    } catch (err) {
+      console.error("Error:", err);
+      alert("Ocurrió un error al procesar tu solicitud.");
     }
-
-    fetch("https://formsubmit.co/ajax/organikasessions@gmail.com", {
-      method: "POST",
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    }).then(() => {
-      const links = {
-        general: "https://mpago.la/1xU7VD6",
-        vip: "https://mpago.la/your-vip-ticket-link"
-      };
-      window.location.href = links[ticketType];
-    });
   });
 </script>
 
@@ -179,13 +192,13 @@
       <ul class="list-disc ml-5 space-y-2">
         <li>La entrada es válida exclusivamente para el evento, fecha y ubicación indicados.</li>
         <li>El reembolso del 100% del valor del ticket (exceptuando costos de servicio) se realizará únicamente si el evento es cancelado por parte de la producción.</li>
-        <li>Si el comprador cancela su asistencia, se reembolsará solo el 60% del valor del ticket, siempre que se solicite con al menos 48 horas de anticipación.</li>
-        <li>El 2% del total corresponde a costos de servicio de la plataforma y no es reembolsable bajo ninguna circunstancia.</li>
-        <li>Los tickets son personales e intransferibles. Intentos de reventa pueden invalidar el acceso.</li>
-        <li>Los asistentes deben presentar su identificación al ingreso junto con el ticket digital o impreso.</li>
-        <li>Organika Sessions se reserva el derecho de admisión y no se responsabiliza por objetos extraviados o daños ocasionados por terceros.</li>
+        <li>Si el comprador cancela su asistencia, se reembolsará solo el 60% del valor del ticket, con 48h de anticipación.</li>
+        <li>El 2% del total corresponde a costos de servicio de la plataforma y no es reembolsable.</li>
+        <li>Tickets intransferibles. Reventa inválida.</li>
+        <li>Debe presentar cédula e-ticket al ingreso.</li>
+        <li>Organika Sessions no se hace responsable por pérdidas u objetos dañados.</li>
       </ul>
-      <p>Para dudas o consultas, escríbenos a <a href="mailto:organikasessions@gmail.com" class="text-custom-purple underline">organikasessions@gmail.com</a>.</p>
+      <p>Contacto: <a href="mailto:organikasessions@gmail.com" class="text-custom-purple underline">organikasessions@gmail.com</a></p>
     </div>
   </div>
 </div>
@@ -193,9 +206,7 @@
 <script>
   function toggleModal(id, show) {
     const modal = document.getElementById(id);
-    if (modal) {
-      modal.classList.toggle("hidden", !show);
-    }
+    if (modal) modal.classList.toggle("hidden", !show);
   }
 
   window.addEventListener("click", function (e) {
@@ -205,7 +216,5 @@
     }
   });
 </script>
-
-
 </body>
 </html>
