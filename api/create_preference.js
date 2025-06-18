@@ -2,6 +2,7 @@
 
 import mercadopago from 'mercadopago';
 
+// 🔐 Configure Mercado Pago with your access token from environment variable
 mercadopago.configure({
   access_token: process.env.MP_ACCESS_TOKEN,
 });
@@ -12,10 +13,12 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Parse JSON manually if body is undefined
-    const body = req.body || await getRawBody(req);
+    // Vercel already parses req.body as JSON (unless raw body is used), so we avoid double parsing
+    const { ticketType, quantity, price } = req.body;
 
-    const { ticketType, quantity, price } = typeof body === 'string' ? JSON.parse(body) : body;
+    if (!ticketType || !quantity || !price) {
+      return res.status(400).json({ error: 'Missing required parameters' });
+    }
 
     const preference = {
       items: [
@@ -37,17 +40,7 @@ export default async function handler(req, res) {
     const response = await mercadopago.preferences.create(preference);
     return res.status(200).json({ id: response.body.id });
   } catch (error) {
-    console.error('Error en create_preference:', error);
+    console.error('❌ Error en create_preference:', error);
     return res.status(500).json({ error: 'Error interno al crear la preferencia' });
   }
-}
-
-// Utility to parse raw body if needed
-async function getRawBody(req) {
-  return new Promise((resolve, reject) => {
-    let data = '';
-    req.on('data', chunk => (data += chunk));
-    req.on('end', () => resolve(data));
-    req.on('error', err => reject(err));
-  });
 }
