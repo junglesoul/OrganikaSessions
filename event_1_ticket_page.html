@@ -111,7 +111,14 @@
   </div>
 </footer>
 
-<!-- Modal Logic -->
+<!-- Mercado Pago Initialization -->
+<script>
+  const mp = new MercadoPago("APP_USR-3644fa5d-6065-4c3e-8681-0960c0068dd8", {
+    locale: "es-CL"
+  });
+</script>
+
+<!-- Form & Modal Script -->
 <script>
   function openTicketModal(type) {
     document.getElementById('ticketType').value = type;
@@ -141,20 +148,12 @@
     }
   }
 
-
-  const mp = new MercadoPago("APP_USR-3644fa5d-6065-4c3e-8681-0960c0068dd8", {
-    locale: "es-CL"
-  });
-
   document.getElementById('ticketForm').addEventListener('submit', async function (e) {
     e.preventDefault();
 
     const ticketType = document.getElementById('ticketType').value;
     const qty = parseInt(document.getElementById('ticketQuantity').value);
-    const priceMap = {
-      general: 10000,
-      vip: 20000
-    };
+    const priceMap = { general: 10000, vip: 20000 };
     const price = priceMap[ticketType] || 10000;
 
     try {
@@ -164,62 +163,17 @@
         body: JSON.stringify({ ticketType, quantity: qty, price })
       });
 
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}`);
-      }
+      const result = await response.json();
 
-      const preferenceData = await response.json();
-
-      if (!preferenceData.id) {
-        throw new Error("La preferencia no tiene ID");
-      }
+      if (!result.id) throw new Error("No se pudo obtener el ID de la preferencia");
 
       mp.checkout({
         preference: {
-          id: preferenceData.id
+          id: result.id
         },
         autoOpen: true
       });
-    } catch (err) {
-      console.error("Error al generar el pago:", err);
-      alert("Ocurrió un error al procesar tu solicitud. Intenta nuevamente más tarde.");
-    }
-  });
-</script>
 
-<!-- Términos y Condiciones Modal -->
-<div id="termsModal" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 hidden">
-  <div class="bg-custom-dark text-white max-w-2xl w-full p-6 rounded-lg shadow-lg relative overflow-y-auto max-h-[80vh]">
-    <button onclick="toggleModal('termsModal', false)" class="absolute top-3 right-4 text-gray-400 hover:text-white text-2xl">&times;</button>
-    <h2 class="text-2xl font-bold mb-4 text-custom-teal">Términos y Condiciones de Compra</h2>
-    <div class="space-y-4 text-sm text-gray-300">
-      <p>Al comprar una entrada a través de esta plataforma, usted acepta las siguientes condiciones de acuerdo a la legislación chilena:</p>
-      <ul class="list-disc ml-5 space-y-2">
-        <li>La entrada es válida exclusivamente para el evento, fecha y ubicación indicados.</li>
-        <li>El reembolso del 100% del valor del ticket (exceptuando costos de servicio) se realizará únicamente si el evento es cancelado por parte de la producción.</li>
-        <li>Si el comprador cancela su asistencia, se reembolsará solo el 60% del valor del ticket, con 48h de anticipación.</li>
-        <li>El 2% del total corresponde a costos de servicio de la plataforma y no es reembolsable.</li>
-        <li>Tickets intransferibles. Reventa inválida.</li>
-        <li>Debe presentar cédula e-ticket al ingreso.</li>
-        <li>Organika Sessions no se hace responsable por pérdidas u objetos dañados.</li>
-      </ul>
-      <p>Contacto: <a href="mailto:organikasessions@gmail.com" class="text-custom-purple underline">organikasessions@gmail.com</a></p>
-    </div>
-  </div>
-</div>
-
-<script>
-  function toggleModal(id, show) {
-    const modal = document.getElementById(id);
-    if (modal) modal.classList.toggle("hidden", !show);
-  }
-
-  window.addEventListener("click", function (e) {
-    const modal = document.getElementById("termsModal");
-    if (modal && e.target === modal) {
-      modal.classList.add("hidden");
-    }
-  });
-</script>
-</body>
-</html>
+    } catch (error) {
+      console.error("Error al procesar el pago:", error);
+      alert("Hubo un problema al generar el pago. Intenta nuevam
