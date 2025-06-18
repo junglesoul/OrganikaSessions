@@ -141,12 +141,11 @@
     }
   }
 
-  // Initialize Mercado Pago
+
   const mp = new MercadoPago("APP_USR-3644fa5d-6065-4c3e-8681-0960c0068dd8", {
     locale: "es-CL"
   });
 
-  // Submit handler
   document.getElementById('ticketForm').addEventListener('submit', async function (e) {
     e.preventDefault();
 
@@ -159,30 +158,31 @@
     const price = priceMap[ticketType] || 10000;
 
     try {
-const preferenceRes = await fetch("https://organika-sessions.vercel.app/api/create_preference", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({
-    ticketType,
-    quantity: qty,
-    price
-  })
-});
+      const response = await fetch("https://organika-sessions.vercel.app/api/create_preference", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ticketType, quantity: qty, price })
+      });
 
-
-      const data = await res.json();
-
-      if (data && data.id) {
-        mp.checkout({
-          preference: { id: data.id },
-          autoOpen: true
-        });
-      } else {
-        alert("No se pudo iniciar el pago. Intenta nuevamente.");
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
       }
+
+      const preferenceData = await response.json();
+
+      if (!preferenceData.id) {
+        throw new Error("La preferencia no tiene ID");
+      }
+
+      mp.checkout({
+        preference: {
+          id: preferenceData.id
+        },
+        autoOpen: true
+      });
     } catch (err) {
-      console.error("Error:", err);
-      alert("Ocurrió un error al procesar tu solicitud.");
+      console.error("Error al generar el pago:", err);
+      alert("Ocurrió un error al procesar tu solicitud. Intenta nuevamente más tarde.");
     }
   });
 </script>
