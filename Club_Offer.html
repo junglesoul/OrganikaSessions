@@ -8,15 +8,29 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet"/>
   <style>
-    body {
-      font-family: 'Montserrat', sans-serif;
-      background: linear-gradient(to bottom right, #0f0f0f, #1a1a1a);
-      color: #f5f5f5;
-    }
-    .text-custom-purple { color: #8f78a8; }
-    .text-custom-teal { color: #2aa99d; }
-    .bg-custom-dark { background-color: #0a0a0a; }
-  </style>
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(to bottom right, #0f0f0f, #1a1a1a);
+    color: #f5f5f5;
+  }
+  .text-custom-purple { color: #8f78a8; }
+  .text-custom-teal { color: #2aa99d; }
+  .bg-custom-dark { background-color: #0a0a0a; }
+  .bullet-item {
+    display: flex;
+    align-items: start;
+    gap: 12px;
+    margin-bottom: 1rem;
+  }
+  .bullet-icon {
+    margin-top: 0.4rem;
+    width: 10px;
+    height: 10px;
+    border-radius: 9999px;
+    flex-shrink: 0;
+  }
+</style>
+
 </head>
 <body>
 
@@ -46,16 +60,16 @@
         <span class="text-custom-teal">Propuesta para</span> <span class="text-custom-purple">Clubs</span>
       </h2>
 
-      <!-- Intro Bullet Style -->
-      <div class="space-y-4 mb-10">
-        <div class="flex items-start gap-3">
-          <div class="mt-1 w-2 h-2 bg-custom-teal rounded-full flex-shrink-0"></div>
+      <!-- Intro Section -->
+      <div class="mb-10">
+        <div class="bullet-item">
+          <div class="bullet-icon bg-custom-teal"></div>
           <p class="text-gray-300">
             En Organika Sessions fusionamos lo orgánico con la electrónica para crear experiencias inmersivas que elevan la energía de cualquier club.
           </p>
         </div>
-        <div class="flex items-start gap-3">
-          <div class="mt-1 w-2 h-2 bg-custom-teal rounded-full flex-shrink-0"></div>
+        <div class="bullet-item">
+          <div class="bullet-icon bg-custom-teal"></div>
           <p class="text-gray-300">
             Adaptamos nuestra propuesta a tu espacio, respetamos tu identidad y enriquecemos tu comunidad con sonidos únicos y una vibra inolvidable.
           </p>
@@ -64,38 +78,38 @@
 
       <!-- ¿Qué Ofrecemos? -->
       <h3 class="text-2xl font-semibold text-custom-teal mb-6">¿Qué Ofrecemos?</h3>
-      <div class="space-y-4 mb-10">
-        <div class="flex items-start gap-3">
-          <div class="mt-1 w-2 h-2 bg-custom-purple rounded-full flex-shrink-0"></div>
+      <div class="mb-10">
+        <div class="bullet-item">
+          <div class="bullet-icon bg-custom-purple"></div>
           <p class="text-gray-300">Lineups con DJs emergentes y consolidados en la escena electrónica orgánica y deep house.</p>
         </div>
-        <div class="flex items-start gap-3">
-          <div class="mt-1 w-2 h-2 bg-custom-purple rounded-full flex-shrink-0"></div>
+        <div class="bullet-item">
+          <div class="bullet-icon bg-custom-purple"></div>
           <p class="text-gray-300">Gestión visual completa: proyecciones, diseño gráfico, contenido audiovisual y promoción digital.</p>
         </div>
-        <div class="flex items-start gap-3">
-          <div class="mt-1 w-2 h-2 bg-custom-purple rounded-full flex-shrink-0"></div>
+        <div class="bullet-item">
+          <div class="bullet-icon bg-custom-purple"></div>
           <p class="text-gray-300">Colaboraciones con marcas, colectivos y espacios afines a la escena cultural y musical.</p>
         </div>
-        <div class="flex items-start gap-3">
-          <div class="mt-1 w-2 h-2 bg-custom-purple rounded-full flex-shrink-0"></div>
+        <div class="bullet-item">
+          <div class="bullet-icon bg-custom-purple"></div>
           <p class="text-gray-300">Difusión activa a través de redes sociales, canales de streaming y mailing list.</p>
         </div>
       </div>
 
       <!-- ¿Por qué Organika? -->
       <h3 class="text-2xl font-semibold text-custom-purple mb-6">¿Por qué Organika?</h3>
-      <div class="space-y-4 mb-10">
-        <div class="flex items-start gap-3">
-          <div class="mt-1 w-2 h-2 bg-custom-teal rounded-full flex-shrink-0"></div>
+      <div class="mb-10">
+        <div class="bullet-item">
+          <div class="bullet-icon bg-custom-teal"></div>
           <p class="text-gray-300">Audiencia nicho que valora calidad musical, conexión espiritual y experiencias auténticas.</p>
         </div>
-        <div class="flex items-start gap-3">
-          <div class="mt-1 w-2 h-2 bg-custom-teal rounded-full flex-shrink-0"></div>
+        <div class="bullet-item">
+          <div class="bullet-icon bg-custom-teal"></div>
           <p class="text-gray-300">Equipo profesional con trayectoria en producción de eventos, booking y desarrollo artístico.</p>
         </div>
-        <div class="flex items-start gap-3">
-          <div class="mt-1 w-2 h-2 bg-custom-teal rounded-full flex-shrink-0"></div>
+        <div class="bullet-item">
+          <div class="bullet-icon bg-custom-teal"></div>
           <p class="text-gray-300">Estética visual coherente, emocional y contemporánea que atrae públicos sensibles al arte.</p>
         </div>
       </div>
@@ -109,6 +123,7 @@
     </div>
   </div>
 </main>
+
 
 <!-- Footer -->
 <footer class="footer py-12 px-6">
