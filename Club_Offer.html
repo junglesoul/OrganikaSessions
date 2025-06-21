@@ -7,7 +7,7 @@
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet"/>
-  <style>
+<style>
   body {
     font-family: 'Montserrat', sans-serif;
     background: linear-gradient(to bottom right, #0f0f0f, #1a1a1a);
@@ -16,20 +16,24 @@
   .text-custom-purple { color: #8f78a8; }
   .text-custom-teal { color: #2aa99d; }
   .bg-custom-dark { background-color: #0a0a0a; }
+
+  /* ✅ Fix bullets style */
   .bullet-item {
     display: flex;
-    align-items: start;
-    gap: 12px;
+    align-items: flex-start;
+    gap: 0.75rem;
     margin-bottom: 1rem;
   }
+
   .bullet-icon {
-    margin-top: 0.4rem;
-    width: 10px;
-    height: 10px;
+    width: 0.5rem;
+    height: 0.5rem;
     border-radius: 9999px;
     flex-shrink: 0;
+    margin-top: 0.4rem;
   }
 </style>
+
 
 </head>
 <body>
