@@ -318,7 +318,7 @@
                         Escuchar Podcasts
                     </a>
                     <a href="#gigs" class="px-8 py-3 rounded-full border-2 border-custom-teal text-white font-semibold text-lg hover:bg-custom-teal hover:bg-opacity-20 transition-all">
-                        Próximos Eventoos
+                        Próximos Eventos
                     </a>
                 </div>
             </div>
@@ -409,7 +409,16 @@
               <span class="text-sm text-gray-400">By Inti Parini</span>
               <div class="flex space-x-2">
                 <i class="fas fa-heart text-custom-purple cursor-pointer"></i>
-                <i class="fas fa-share-alt text-custom-teal cursor-pointer"></i>
+                <span class="relative inline-block">
+                      <i class="fas fa-share-alt text-custom-teal cursor-pointer" onclick="toggleSharePopup()"></i>
+
+                      <div id="sharePopup" class="hidden absolute z-10 mt-2 bg-custom-dark text-sm text-white p-3 rounded-lg shadow-lg space-y-2 w-48 right-0">
+                        <a href="#" id="fbShare" target="_blank" class="block hover:underline">Compartir en Facebook</a>
+                        <a href="#" id="waShare" target="_blank" class="block hover:underline">Compartir en WhatsApp</a>
+                        <a href="#" id="copyLink" class="block hover:underline">Copiar enlace</a>
+                      </div>
+                </span>
+
               </div>
             </div>
           </div>
@@ -1384,6 +1393,24 @@
       const banner = document.getElementById("cookieBanner");
       if (banner) banner.style.display = "none";
     }
+  });
+</script>
+
+    <script>
+  function toggleSharePopup() {
+    const popup = document.getElementById("sharePopup");
+    popup.classList.toggle("hidden");
+  }
+
+  const shareURL = window.location.href;
+
+  document.getElementById("fbShare").href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareURL)}`;
+  document.getElementById("waShare").href = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareURL)}`;
+
+  document.getElementById("copyLink").addEventListener("click", () => {
+    navigator.clipboard.writeText(shareURL).then(() => {
+      alert("Enlace copiado al portapapeles ✅");
+    });
   });
 </script>
 
