@@ -273,6 +273,33 @@
         scrollbar-width: auto;
       }
     }
+
+        /* Darker cards and modals */
+.card,
+.podcast-player,
+#ticketModal,
+#termsModal,
+#privacyModal {
+  background-color: rgba(10, 10, 10, 0.85) !important;
+  border-color: rgba(143, 120, 168, 0.1) !important;
+  backdrop-filter: blur(8px);
+}
+
+/* Darker gallery overlay */
+.gallery-overlay {
+  background: rgba(10, 10, 10, 0.7);
+}
+
+/* Darker gradient dividers */
+.section-divider {
+  background: linear-gradient(90deg, transparent, #2aa99d40, #8f78a840, transparent);
+}
+
+/* Optional: reduce shadow glow */
+.card:hover {
+  box-shadow: 0 8px 16px rgba(42, 169, 157, 0.15);
+}
+
     </style>
 </head>
 <body>
