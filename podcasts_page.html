@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Podcasts - Organika Sessions</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="favicon.ico" />
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: url('organika_background.png') no-repeat center center fixed;
+      background-size: cover;
+      color: #f5f5f5;
+    }
+    .bg-custom-dark { background-color: #0a0a0a; }
+    .text-custom-purple { color: #8f78a8; }
+    .text-custom-teal { color: #2aa99d; }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="bg-custom-dark py-4 px-6">
+    <div class="container mx-auto flex justify-between items-center">
+      <h1 class="text-3xl font-bold">
+        <a href="index.html">
+          <span class="text-custom-purple">organika</span><span class="text-white">sessions</span>
+        </a>
+      </h1>
+      <nav class="space-x-4 text-sm">
+        <a href="index.html#sobre" class="text-gray-300 hover:text-white">Sobre</a>
+        <a href="index.html#nosotros" class="text-gray-300 hover:text-white">Nosotros</a>
+        <a href="index.html#events" class="text-gray-300 hover:text-white">Eventos</a>
+        <a href="index.html#gallery" class="text-gray-300 hover:text-white">Galería</a>
+        <a href="artistas.html" class="text-custom-teal hover:text-white font-semibold">Artistas</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="py-20 px-6">
+    <div class="container mx-auto max-w-5xl">
+      <h2 class="text-4xl font-bold text-center mb-12">
+        <span class="text-custom-purple">Nuestros</span> <span class="text-custom-teal">Podcasts</span>
+      </h2>
+
+      <!-- Podcast Cards -->
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="bg-custom-dark p-6 rounded-lg shadow-lg">
+          <h3 class="text-xl font-semibold text-custom-teal mb-2">Organika Podcast 001 - DJ Naturalia</h3>
+          <p class="text-gray-400 mb-4">Deep & Organic House con sonidos naturales, grabado en vivo desde Puesco.</p>
+          <iframe width="100%" height="120" src="https://www.mixcloud.com/widget/iframe/?feed=https%3A%2F%2Fwww.mixcloud.com%2Forganikasessions%2Fnaturalia-live-puesco%2F" frameborder="0" allow="autoplay"></iframe>
+        </div>
+
+        <div class="bg-custom-dark p-6 rounded-lg shadow-lg">
+          <h3 class="text-xl font-semibold text-custom-teal mb-2">Organika Podcast 002 - Terra Form</h3>
+          <p class="text-gray-400 mb-4">Un viaje de ritmos tribales con groove introspectivo.</p>
+          <iframe width="100%" height="120" src="https://www.mixcloud.com/widget/iframe/?feed=https%3A%2F%2Fwww.mixcloud.com%2Forganikasessions%2Fterra-form-mix%2F" frameborder="0" allow="autoplay"></iframe>
+        </div>
+
+        <!-- Puedes seguir agregando más podcasts aquí -->
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer bg-custom-dark py-10 px-6 mt-20">
+    <div class="container mx-auto text-center text-sm text-gray-400">
+      &copy; 2025 Organika Sessions. Todos los derechos reservados.
+    </div>
+  </footer>
+</body>
+</html>
